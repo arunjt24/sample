@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_padding">10dp</dimen>
+    <dimen name="button_padding">15dp</dimen>
+    <dimen name="form_element_radius">10dp</dimen>
+    <dimen name="layout_margin">15dp</dimen>
+</resources>
