@@ -4,11 +4,11 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primaryLite</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/text</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondaryLite</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/text</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -16,30 +16,49 @@
         <item name="android:textColor">@color/text</item>
         <item name="android:editTextColor">@color/text</item>
 
+        <item name="android:windowContentTransitions">true</item>
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform</item>
+
         <item name="android:activityOpenEnterAnimation">@anim/open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/open_exit</item>
         <item name="android:activityCloseEnterAnimation">@anim/close_enter</item>
         <item name="android:activityCloseExitAnimation">@anim/close_exit</item>
 
     </style>
+
     <style name="TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_margin">@dimen/content_margin</item>
         <item name="boxCornerRadiusBottomStart">@dimen/form_element_radius</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/form_element_radius</item>
         <item name="boxCornerRadiusTopStart">@dimen/form_element_radius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/form_element_radius</item>
-        <item name="boxBackgroundColor">@color/primaryLite</item>
-        <item name="startIconTint">@color/secondaryLite</item>
+        <item name="boxBackgroundColor">@color/transparent</item>
+        <item name="startIconTint">@color/primaryLite</item>
         <item name="android:gravity">center_vertical</item>
         <item name="boxStrokeColor">@color/primary</item>
-        <item name="android:layout_margin">5dp</item>
         <item name="boxBackgroundMode">outline</item>
         <item name="errorEnabled">true</item>
         <item name="errorTextColor">@color/danger</item>
-        <item name="hintEnabled">false</item>
+<!--        <item name="hintEnabled">false</item>-->
         <item name="maxLines">1</item>
     </style>
+
     <style name="PasswordInput" parent="TextInput">
         <item name="passwordToggleTint">@color/secondaryLite</item>
         <item name="passwordToggleEnabled">true</item>
     </style>
+
+    <style name="Theme.Sample.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Sample.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Sample.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

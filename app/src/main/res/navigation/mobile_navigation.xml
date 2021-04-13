@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_dashboard">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.example.sample.ui.dashboard.DashboardFragment"
+        android:label="@string/menu_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/nav_col_list"
+        android:name="com.example.sample.ui.collection.ListFragment"
+        android:label="@string/menu_list"
+        tools:layout="@layout/fragment_list_collections" />
+
+    <fragment
+        android:id="@+id/nav_col_create"
+        android:name="com.example.sample.ui.collection.CreateFragment"
+        android:label="@string/menu_create"
+        tools:layout="@layout/fragment_new_collection" />
+
+    <fragment
+        android:id="@+id/nav_bor_create"
+        android:name="com.example.sample.ui.borrower.CreateFragment"
+        android:label="@string/menu_create"
+        tools:layout="@layout/fragment_new_collection" />
+
+    <fragment
+        android:id="@+id/nav_bor_list"
+        android:name="com.example.sample.ui.borrower.ListFragment"
+        android:label="@string/menu_create"
+        tools:layout="@layout/fragment_new_collection" />
+
+</navigation>

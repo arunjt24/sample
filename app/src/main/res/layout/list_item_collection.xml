@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/itemCard"
+    app:cardUseCompatPadding="true"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/form_element_radius"
+    app:contentPadding="@dimen/content_padding"
+    app:cardBackgroundColor="@color/primary">
+    <LinearLayout
+        android:padding="@dimen/content_padding"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_margin="@dimen/content_margin"
+            app:contentPadding="@dimen/content_padding"
+            app:cardCornerRadius="50dp"
+            app:cardBackgroundColor="@color/primaryLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@null"
+                android:text="N"
+                android:id="@+id/circleName"
+                android:textSize="25sp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center" />
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:padding="@dimen/content_padding"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:transitionName="userName"
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:id="@+id/userMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
