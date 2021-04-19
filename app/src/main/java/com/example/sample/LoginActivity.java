@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    public void goMain(View view) {
+    public void doLogin(View view) {
         if (!isValidName(getName())) {
             name.callOnClick();
             name.requestFocus();
@@ -118,43 +118,45 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         System.out.println(getPassword());
         login.setUserName(getName());
         login.setUserPassword(getPassword());
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        finish();
-//        HttpClient.login(login).enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                if (response.code() == HTTP_OK) {
-//                    User user = response.body();
-//                    if (user != null) {
-//                        if (user.getSuccess() == 1) {
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                            finish();
-//                        } else {
-//                            System.out.println(user.getMessage());
-//                            loginFailed(user.getMessage());
-//                        }
-//                    } else {
-//                        System.out.println("Failed to login! 1");
-//                        loginFailed("Failed to login!");
-//                    }
-//                } else {
-//                    System.out.println("Failed to login! 2");
-//                    loginFailed("Failed to login!");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                System.out.println("Failed to login! 3");
-//                loginFailed("Failed to login!");
-//            }
-//
-//            private void loginFailed(String message) {
-//                loginMessage.setText(message);
-//                loginMessage.setVisibility(VISIBLE);
-//                name.requestFocus();
-//            }
-//        });
+//        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//        finish();
+        HttpClient.login(login).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                System.out.println("response.body() "+response.body());
+                if (response.code() == HTTP_OK) {
+                    User user = response.body();
+                    if (user != null) {
+                        if (user.getSuccess() == 1) {
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
+                        } else {
+                            System.out.println(user.getMessage());
+                            loginFailed(user.getMessage());
+                        }
+                    } else {
+                        System.out.println("Failed to login! 1");
+                        loginFailed("Failed to login!");
+                    }
+                } else {
+                    System.out.println("Failed to login! 2");
+                    loginFailed("Failed to login!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+                System.out.println("Failed to login! 3");
+                loginFailed("Failed to login!");
+            }
+
+            private void loginFailed(String message) {
+                loginMessage.setText(message);
+                loginMessage.setVisibility(VISIBLE);
+                name.requestFocus();
+            }
+        });
     }
 
     @Override

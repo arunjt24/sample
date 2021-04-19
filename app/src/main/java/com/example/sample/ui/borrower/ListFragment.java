@@ -9,6 +9,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -22,10 +24,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sample.MainActivity;
 import com.example.sample.R;
 import com.example.sample.client.HttpClient;
 import com.example.sample.model.Borrower;
 import com.example.sample.model.BorrowerResponse;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -34,18 +38,77 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListFragment extends Fragment implements LifecycleOwner {
+public class ListFragment extends Fragment implements LifecycleOwner, MainActivity.Listener {
 
     private ListViewModel listViewModel;
     private RecyclerListAdapter recyclerViewAdapter;
     private RecyclerView recyclerView;
+    private View borrowerCard;
+    private View updateButton;
+
+    TextInputEditText firstName;
+    TextInputEditText fatherName;
+    TextInputEditText eMail;
+    TextInputEditText mobileNumber;
+    TextInputEditText address;
+    TextInputEditText occupation;
+    TextInputEditText monthlyIncome;
+    TextInputEditText kycProof;
+    TextInputEditText referenceName;
+    TextInputEditText referenceMobile;
+    private String borrowersId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         listViewModel =
                 new ViewModelProvider(this).get(ListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_list_borrowers, container, false);
+
+        ((MainActivity) getActivity()).addListener(this);
         recyclerView = root.findViewById(R.id.recycler_view);
+        borrowerCard = root.findViewById(R.id.borrowerCard);
+
+        firstName = root.findViewById(R.id.first_name);
+        fatherName = root.findViewById(R.id.father_name);
+        eMail = root.findViewById(R.id.e_mail);
+        mobileNumber = root.findViewById(R.id.mobile_number);
+        address = root.findViewById(R.id.address);
+        occupation = root.findViewById(R.id.occupation);
+        monthlyIncome = root.findViewById(R.id.monthly_income);
+        kycProof = root.findViewById(R.id.proof_no);
+        referenceName = root.findViewById(R.id.reference_name);
+        referenceMobile = root.findViewById(R.id.reference_mobile);
+
+        updateButton = root.findViewById(R.id.updateBorrower);
+        updateButton.setOnClickListener(v -> {
+            Borrower editBorrower = new Borrower();
+            editBorrower.setFirstName(firstName.getText().toString());
+            editBorrower.setFatherName(fatherName.getText().toString());
+            editBorrower.setEmail(eMail.getText().toString());
+            editBorrower.setMobile(mobileNumber.getText().toString());
+            editBorrower.setAddress(address.getText().toString());
+            editBorrower.setOccupation(occupation.getText().toString());
+            editBorrower.setMonthlyIncome(monthlyIncome.getText().toString());
+            editBorrower.setProof(kycProof.getText().toString());
+            editBorrower.setReferenceName(referenceName.getText().toString());
+            editBorrower.setReferencMobile(referenceMobile.getText().toString());
+            editBorrower.setBorrowersId(borrowersId);
+            System.out.println("Borrower Model : "+editBorrower.toString());
+            HttpClient.editBorrower(editBorrower).enqueue(new Callback<Borrower>() {
+                @Override
+                public void onResponse(Call<Borrower> call, Response<Borrower> response) {
+                    System.out.println("response.body() "+response.code());
+                    System.out.println("response.body() "+response.body().toString());
+                    borrowerCard.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onFailure(Call<Borrower> call, Throwable t) {
+                    t.printStackTrace();
+
+                }
+            });
+        });
         listViewModel.getStringLiveData().observe(getViewLifecycleOwner(), userListUpdateObserver);
 
         HttpClient.getBorrowers().enqueue(new Callback<BorrowerResponse>() {
@@ -77,7 +140,17 @@ public class ListFragment extends Fragment implements LifecycleOwner {
         }
     };
 
-    private static class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ListViewHolder>{
+    @Override
+    public boolean onBackPressed() {
+        if (borrowerCard.getVisibility() == View.VISIBLE) {
+            borrowerCard.setVisibility(View.GONE);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ListViewHolder>{
 
         final Activity context;
         final ArrayList<Borrower> borrowerArrayList;
@@ -120,12 +193,27 @@ public class ListFragment extends Fragment implements LifecycleOwner {
             });
 
             holder.itemCard.setOnClickListener(v -> {
-                Intent intent = new Intent(context, EditActivity.class);
-                intent.putExtra("borrower", new Gson().toJson(listValue,Borrower.class));
 
-                intent.putExtra("userName", holder.userName.getText().toString());
+                Animation test = AnimationUtils.loadAnimation(context, R.anim.slide_in_up);
+                borrowerCard.setVisibility(View.VISIBLE);
+                borrowerCard.startAnimation(test);
+                borrowersId = listValue.getBorrowersId();
+                firstName.setText(listValue.getFirstName());
+                fatherName.setText(listValue.getFatherName());
+                eMail.setText(listValue.getEmail());
+                mobileNumber.setText(listValue.getMobile());
+                address.setText(listValue.getAddress());
+                occupation.setText(listValue.getOccupation());
+                monthlyIncome.setText(listValue.getMonthlyIncome());
+                kycProof.setText(listValue.getProof());
+                referenceName.setText(listValue.getReferenceName());
+                referenceMobile.setText(listValue.getReferencMobile());
+//                Intent intent = new Intent(context, EditActivity.class);
+//                intent.putExtra("borrower", new Gson().toJson(listValue,Borrower.class));
+
+//                intent.putExtra("userName", holder.userName.getText().toString());
 //                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(context, holder.userName, "userName");
-                context.startActivity(intent/*,options.toBundle()*/);
+//                context.startActivity(intent/*,options.toBundle()*/);
             });
         }
 

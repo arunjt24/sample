@@ -1,17 +1,25 @@
 package com.example.sample.client;
 
+import com.example.sample.model.Borrower;
 import com.example.sample.model.Login;
 import com.example.sample.model.BorrowerResponse;
 import com.example.sample.model.User;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import com.example.sample.util.Config;
 
+import org.jetbrains.annotations.NotNull;
+
+import okhttp3.Authenticator;
+import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okhttp3.Route;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -24,13 +32,9 @@ import retrofit2.http.Url;
 public class HttpClient {
     private static Gson gson = new Gson();
     public static OkHttpClient client = new OkHttpClient.Builder()
-            .addInterceptor(chain -> {
-//                Request original = chain.request();
-                Request request = chain.request().newBuilder()
-//                        .addHeader("x-access-token", FinancePreference.getToken())
-                        .build();
-
-                return chain.proceed(request);
+            .authenticator((route, response) -> {
+                String credential = Credentials.basic(Config.AUTH_USER_NAME, Config.AUTH_PASSWORD);
+                return response.request().newBuilder().header("Authorization", credential).build();
             })
             .connectTimeout(5, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -64,6 +68,14 @@ public class HttpClient {
         return getServerApi().getBorrowers();
     }
 
+    public static Call<Borrower> createBorrower(Borrower borrower) {
+        return getServerApi().createBorrower(borrower);
+    }
+
+    public static Call<Borrower> editBorrower(Borrower borrower) {
+        return getServerApi().editBorrower(borrower);
+    }
+
     public static Call<ResponseBody> downloadApk(String url) {
         return getServerApi().download(url);
     }
@@ -81,6 +93,11 @@ public class HttpClient {
         @POST("login.php")
         Call<User> doLogin(@Body Login body);
 
+        @POST("addborrowers.php")
+        Call<Borrower> createBorrower(@Body Borrower borrower);
+
+        @POST("editborrowers.php")
+        Call<Borrower> editBorrower(@Body Borrower borrower);
     }
 
 }

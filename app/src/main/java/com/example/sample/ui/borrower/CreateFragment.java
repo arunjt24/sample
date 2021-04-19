@@ -10,10 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sample.R;
+import com.example.sample.client.HttpClient;
 import com.example.sample.model.Borrower;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateFragment extends Fragment {
 
@@ -38,18 +43,18 @@ public class CreateFragment extends Fragment {
 
         final MaterialButton create = root.findViewById(R.id.createBorrower);
 
-        createViewModel.getBorrower().observe(getViewLifecycleOwner(), borrower -> {
-            firstName.setText(borrower.getFirstName());
-            fatherName.setText(borrower.getFatherName());
-            eMail.setText(borrower.getEmail());
-            mobileNumber.setText(borrower.getMobile());
-            address.setText(borrower.getAddress());
-            occupation.setText(borrower.getOccupation());
-            monthlyIncome.setText(borrower.getMonthlyIncome());
-            kycProof.setText(borrower.getProof());
-            referenceName.setText(borrower.getReferenceName());
-            referenceMobile.setText(borrower.getReferencMobile());
-        });
+//        createViewModel.getBorrower().observe(getViewLifecycleOwner(), borrower -> {
+//            firstName.setText(borrower.getFirstName());
+//            fatherName.setText(borrower.getFatherName());
+//            eMail.setText(borrower.getEmail());
+//            mobileNumber.setText(borrower.getMobile());
+//            address.setText(borrower.getAddress());
+//            occupation.setText(borrower.getOccupation());
+//            monthlyIncome.setText(borrower.getMonthlyIncome());
+//            kycProof.setText(borrower.getProof());
+//            referenceName.setText(borrower.getReferenceName());
+//            referenceMobile.setText(borrower.getReferencMobile());
+//        });
 
         if (firstName.getText() != null &&
                 fatherName.getText() != null &&
@@ -74,6 +79,18 @@ public class CreateFragment extends Fragment {
                 borrower.setProof(kycProof.getText().toString());
                 borrower.setReferenceName(referenceName.getText().toString());
                 borrower.setReferencMobile(referenceMobile.getText().toString());
+                HttpClient.createBorrower(borrower).enqueue(new Callback<Borrower>() {
+                    @Override
+                    public void onResponse(Call<Borrower> call, Response<Borrower> response) {
+                        System.out.println("response.body() "+response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Borrower> call, Throwable t) {
+                        t.printStackTrace();
+
+                    }
+                });
                 System.out.println("Borrower Model : "+borrower.toString());
             });
         }

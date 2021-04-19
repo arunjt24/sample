@@ -6,8 +6,8 @@ public class Borrower {
     @SerializedName("Borrowersid")
     private String borrowersId;
 
-    @SerializedName("Branchid")
-    private String branchid;
+//    @SerializedName("Branchid")
+//    private String branchid;
 
     @SerializedName("Borrowerscode")
     private String borrowersCode;
@@ -42,9 +42,6 @@ public class Borrower {
     @SerializedName("Refferecemobile")
     private String referencMobile;
 
-    @SerializedName("Created")
-    private String created;
-
 
     public String getBorrowersId() {
         return borrowersId;
@@ -54,13 +51,13 @@ public class Borrower {
         this.borrowersId = borrowersId;
     }
 
-    public String getBranchid() {
-        return branchid;
-    }
-
-    public void setBranchid(String branchid) {
-        this.branchid = branchid;
-    }
+//    public String getBranchid() {
+//        return branchid;
+//    }
+//
+//    public void setBranchid(String branchid) {
+//        this.branchid = branchid;
+//    }
 
     public String getBorrowersCode() {
         return borrowersCode;
@@ -150,19 +147,10 @@ public class Borrower {
         this.referencMobile = referencMobile;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
     @Override
     public String toString() {
         return "Borrower{" +
                 "borrowersId='" + borrowersId + '\'' +
-                ", branchid='" + branchid + '\'' +
                 ", borrowersCode='" + borrowersCode + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", fatherName='" + fatherName + '\'' +
@@ -174,7 +162,6 @@ public class Borrower {
                 ", proof='" + proof + '\'' +
                 ", referenceName='" + referenceName + '\'' +
                 ", referencMobile='" + referencMobile + '\'' +
-                ", created='" + created + '\'' +
                 '}';
     }
 }

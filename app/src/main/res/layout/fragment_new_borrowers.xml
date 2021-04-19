@@ -44,6 +44,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/first_name"
                             android:hint="First Name"
+                            android:text="Arun"
                             android:inputType="text"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -55,6 +56,7 @@
                         android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/father_name"
+                            android:text="Gold"
                             android:hint="Father Name"
                             android:inputType="text"
                             android:importantForAutofill="no"
@@ -68,6 +70,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/e_mail"
                             android:hint="E-Mail"
+                            android:text="text@test.com"
                             android:inputType="text"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -80,6 +83,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/mobile_number"
                             android:hint="Mobile Number"
+                            android:text="9879879879"
                             android:inputType="number"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -92,6 +96,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/address"
                             android:hint="Address"
+                            android:text="TNJ"
                             android:maxLines="10"
                             android:inputType="text"
                             android:importantForAutofill="no"
@@ -105,6 +110,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/occupation"
                             android:hint="Occupation"
+                            android:text="TEST"
                             android:inputType="text"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -117,6 +123,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/monthly_income"
                             android:hint="Monthly Income"
+                            android:text="1000"
                             android:inputType="number"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -129,6 +136,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/proof_no"
                             android:hint="PROOF NO"
+                            android:text="12345"
                             android:inputType="text"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -141,6 +149,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/reference_name"
                             android:hint="Reference Name"
+                            android:text="Arun"
                             android:inputType="text"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
@@ -153,7 +162,8 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/reference_mobile"
                             android:hint="Reference Mobile"
-                            android:inputType="text"
+                            android:text="9879879876"
+                            android:inputType="phone"
                             android:importantForAutofill="no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>

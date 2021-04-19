@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.Window;
 
 import com.example.sample.model.Borrower;
+import com.example.sample.ui.borrower.ListFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -16,11 +17,25 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Borrower borrower;
     private Borrower collection;
+
+    Listener listener;
+
+    public interface Listener {
+        default boolean onBackPressed() {
+            return false;
+        }
+    }
+
+    public void addListener(Listener listener) {
+        this.listener = listener;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
         return collection;
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        if (listener != null && listener.onBackPressed())
+            return;
+        super.onBackPressed();
+    }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 public class BorrowerResponse {
     @SerializedName("success")
     private Integer success;
+
     @SerializedName("borrowerslist")
     private ArrayList<Borrower> borrowersList;
 
