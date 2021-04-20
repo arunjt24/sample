@@ -16,7 +16,7 @@
         tools:ignore="AllowBackup">
         <activity android:name=".ui.borrower.EditActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Sample.NoActionBar">
             <intent-filter>
@@ -26,7 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".UpdateUser"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Sample.NoActionBar">
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">
 
             <!--<intent-filter>

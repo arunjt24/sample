@@ -76,7 +76,6 @@
                         android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputEditText
                             android:maxLines="1"
-                            android:text="kumar"
                             android:hint="Username"
                             android:id="@+id/email"
                             android:inputType="textPersonName"
@@ -91,7 +90,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:text="kumar"
                             android:maxLines="1"
                             android:hint="Password"
                             android:id="@+id/password"
