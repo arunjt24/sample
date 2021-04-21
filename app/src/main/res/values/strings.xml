@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Sample</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Anjaneya Associates</string>
     <string name="nav_header_subtitle">Chennai</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -14,6 +11,8 @@
     <string name="menu_list">List</string>
     <string name="welcome_message">Welcome to Anjaneya Associates</string>
     <string name="menu_borrowers">Borrowers</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
     <string-array name="branch_s">
         <item>Chennai</item>

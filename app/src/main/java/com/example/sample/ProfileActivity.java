@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class UpdateUser extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     private Button username,password;
     private LinearLayout f_username_update,f_password_update,update_user;

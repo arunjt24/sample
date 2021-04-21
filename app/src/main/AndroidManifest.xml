@@ -14,31 +14,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sample"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.borrower.EditActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/title_activity_login"
             android:theme="@style/Theme.Sample.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".UpdateUser"
-            android:label="@string/title_activity_main"
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
             android:theme="@style/Theme.Sample.NoActionBar">
         </activity>
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">
 
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
     </application>
 

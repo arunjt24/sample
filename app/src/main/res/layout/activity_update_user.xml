@@ -8,7 +8,7 @@
     android:paddingTop="200dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateUser">
+    tools:context=".ProfileActivity">
   <LinearLayout
       android:id="@+id/update_user"
       android:layout_width="match_parent"
@@ -75,42 +75,36 @@
       android:layout_height="wrap_content">
     <com.google.android.material.textfield.TextInputLayout
         style="@style/PasswordInput"
-        android:id="@+id/old_passwordInput"
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:maxLines="1"
           android:hint="Old Password"
-          android:id="@+id/old_password"
           android:inputType="textPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         style="@style/PasswordInput"
-        android:id="@+id/new_passwordInput"
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:maxLines="1"
           android:hint="New Password"
-          android:id="@+id/new_password"
           android:inputType="textPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         style="@style/PasswordInput"
-        android:id="@+id/conform_passwordInput"
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:maxLines="1"
           android:hint="Conform Password"
-          android:id="@+id/conform_password"
           android:inputType="textPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>

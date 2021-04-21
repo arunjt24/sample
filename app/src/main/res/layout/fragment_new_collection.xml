@@ -39,31 +39,40 @@
                         android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/TextInput"
-                        app:startIconDrawable="@drawable/ic_user_24"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:hint="Name"
-                            android:inputType="textCapSentences"
-                            android:importantForAutofill="no"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/TextInput"
-                        app:startIconDrawable="@drawable/ic_phone_24"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:hint="Phone"
-                            android:inputType="phone"
-                            android:importantForAutofill="no"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.button.MaterialButton
+                        android:layout_gravity="bottom"
+                        android:id="@+id/employee"
+                        android:padding="@dimen/button_padding"
+                        app:cornerRadius="@dimen/form_element_radius"
+                        android:text="Select Employee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_gravity="bottom"
+                        android:id="@+id/status"
+                        android:padding="@dimen/button_padding"
+                        app:cornerRadius="@dimen/form_element_radius"
+                        android:text="Select Status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_gravity="bottom"
+                        android:id="@+id/collection_date"
+                        android:padding="@dimen/button_padding"
+                        app:cornerRadius="@dimen/form_element_radius"
+                        android:text="Collection Date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_gravity="bottom"
+                        android:id="@+id/paid_date"
+                        android:padding="@dimen/button_padding"
+                        app:cornerRadius="@dimen/form_element_radius"
+                        android:text="Paid Date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/createCollection"
                         android:layout_gravity="bottom"
                         android:padding="@dimen/button_padding"
                         app:cornerRadius="@dimen/form_element_radius"

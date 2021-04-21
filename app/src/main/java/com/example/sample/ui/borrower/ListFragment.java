@@ -57,14 +57,15 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
     TextInputEditText referenceName;
     TextInputEditText referenceMobile;
     private String borrowersId;
+    private MainActivity activity;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         listViewModel =
                 new ViewModelProvider(this).get(ListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_list_borrowers, container, false);
-
-        ((MainActivity) getActivity()).addListener(this);
+        activity = (MainActivity) getActivity();
+        activity.addListener(this);
         recyclerView = root.findViewById(R.id.recycler_view);
         borrowerCard = root.findViewById(R.id.borrowerCard);
 
@@ -110,7 +111,12 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
             });
         });
         listViewModel.getStringLiveData().observe(getViewLifecycleOwner(), userListUpdateObserver);
+        listViewModel.updateData(activity.getBorrowersList());
 
+        return root;
+    }
+
+    public void refreshBorrowers() {
         HttpClient.getBorrowers().enqueue(new Callback<BorrowerResponse>() {
             @Override
             public void onResponse(Call<BorrowerResponse> call, Response<BorrowerResponse> response) {
@@ -126,8 +132,6 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
                 t.printStackTrace();
             }
         });
-
-        return root;
     }
 
     Observer<ArrayList<Borrower>> userListUpdateObserver = new Observer<ArrayList<Borrower>>() {
