@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import com.example.sample.util.Config;
+import com.google.gson.JsonObject;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import okhttp3.Authenticator;
 import okhttp3.Credentials;
@@ -63,6 +65,15 @@ public class HttpClient {
         System.out.println(login.getUserPassword());
         return getServerApi().doLogin(login);
     }
+    public  static Call<JSONObject> update_pass(JSONObject data)
+    {
+        return getServerApi().update_password(data);
+    }
+
+    public  static Call<JSONObject> update_user(JSONObject data)
+    {
+        return getServerApi().update_username(data);
+    }
 
     public static Call<BorrowerResponse> getBorrowers() {
         return getServerApi().getBorrowers();
@@ -98,6 +109,12 @@ public class HttpClient {
 
         @POST("editborrowers.php")
         Call<Borrower> editBorrower(@Body Borrower borrower);
+
+        @POST("updatepassword.php")
+        Call<JSONObject> update_password(@Body JSONObject body);
+
+        @POST("updateusername.php")
+        Call<JSONObject> update_username(@Body JSONObject body);
     }
 
 }

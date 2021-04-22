@@ -41,6 +41,7 @@
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:hint="Old UserName"
+          android:id="@+id/old_username"
           android:inputType="textCapSentences"
           android:importantForAutofill="no"
           android:layout_width="match_parent"
@@ -53,12 +54,14 @@
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:hint="New UserName"
+          android:id="@+id/new_username"
           android:inputType="textCapSentences"
           android:importantForAutofill="no"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/update_user_name_button"
         android:layout_gravity="bottom"
         android:padding="@dimen/button_padding"
         app:cornerRadius="@dimen/form_element_radius"
@@ -81,6 +84,7 @@
       <com.google.android.material.textfield.TextInputEditText
           android:maxLines="1"
           android:hint="Old Password"
+          android:id="@+id/old_password"
           android:inputType="textPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
@@ -92,6 +96,7 @@
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:maxLines="1"
+          android:id="@+id/new_password"
           android:hint="New Password"
           android:inputType="textPassword"
           android:layout_width="match_parent"
@@ -104,6 +109,7 @@
         android:layout_height="wrap_content">
       <com.google.android.material.textfield.TextInputEditText
           android:maxLines="1"
+          android:id="@+id/conform_password"
           android:hint="Conform Password"
           android:inputType="textPassword"
           android:layout_width="match_parent"
@@ -112,6 +118,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_gravity="bottom"
         android:padding="@dimen/button_padding"
+        android:id="@+id/update_password_button"
         app:cornerRadius="@dimen/form_element_radius"
         android:text="Update"
         android:layout_width="match_parent"
