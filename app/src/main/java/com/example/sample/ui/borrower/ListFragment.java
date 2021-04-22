@@ -1,11 +1,7 @@
 package com.example.sample.ui.borrower;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sample.MainActivity;
 import com.example.sample.R;
 import com.example.sample.client.HttpClient;
-import com.example.sample.model.Borrower;
 import com.example.sample.model.BorrowerResponse;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
@@ -40,12 +35,6 @@ import retrofit2.Response;
 
 public class ListFragment extends Fragment implements LifecycleOwner, MainActivity.Listener {
 
-    private ListViewModel listViewModel;
-    private RecyclerListAdapter recyclerViewAdapter;
-    private RecyclerView recyclerView;
-    private View borrowerCard;
-    private View updateButton;
-
     TextInputEditText firstName;
     TextInputEditText fatherName;
     TextInputEditText eMail;
@@ -56,6 +45,20 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
     TextInputEditText kycProof;
     TextInputEditText referenceName;
     TextInputEditText referenceMobile;
+    private ListViewModel listViewModel;
+    private RecyclerListAdapter recyclerViewAdapter;
+    private RecyclerView recyclerView;
+    Observer<ArrayList<BorrowerResponse.Borrower>> userListUpdateObserver = new Observer<ArrayList<BorrowerResponse.Borrower>>() {
+        @Override
+        public void onChanged(ArrayList<BorrowerResponse.Borrower> userArrayList) {
+            recyclerViewAdapter = new RecyclerListAdapter(getActivity(), userArrayList);
+            LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setLayoutManager(verticalLayoutManager);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        }
+    };
+    private View borrowerCard;
+    private View updateButton;
     private String borrowersId;
     private MainActivity activity;
 
@@ -82,7 +85,7 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
 
         updateButton = root.findViewById(R.id.updateBorrower);
         updateButton.setOnClickListener(v -> {
-            Borrower editBorrower = new Borrower();
+            BorrowerResponse.Borrower editBorrower = new BorrowerResponse.Borrower();
             editBorrower.setFirstName(firstName.getText().toString());
             editBorrower.setFatherName(fatherName.getText().toString());
             editBorrower.setEmail(eMail.getText().toString());
@@ -94,18 +97,17 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
             editBorrower.setReferenceName(referenceName.getText().toString());
             editBorrower.setReferencMobile(referenceMobile.getText().toString());
             editBorrower.setBorrowersId(borrowersId);
-            System.out.println("Borrower Model : "+editBorrower.toString());
-            HttpClient.editBorrower(editBorrower).enqueue(new Callback<Borrower>() {
+            System.out.println("Borrower Model : " + new Gson().toJson(editBorrower, BorrowerResponse.Borrower.class));
+            HttpClient.editBorrower(editBorrower).enqueue(new Callback<String>() {
                 @Override
-                public void onResponse(Call<Borrower> call, Response<Borrower> response) {
-                    System.out.println("response.body() "+response.code());
-                    System.out.println("response.body() "+response.body().toString());
+                public void onResponse(Call<String> call, Response<String> response) {
+                    System.out.println("response.body() " + response.code());
+                    System.out.println("response.body() " + response.body().toString());
                     borrowerCard.setVisibility(View.GONE);
                 }
 
                 @Override
-                public void onFailure(Call<Borrower> call, Throwable t) {
-                    t.printStackTrace();
+                public void onFailure(Call<String> call, Throwable t) {
 
                 }
             });
@@ -120,7 +122,7 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
         HttpClient.getBorrowers().enqueue(new Callback<BorrowerResponse>() {
             @Override
             public void onResponse(Call<BorrowerResponse> call, Response<BorrowerResponse> response) {
-                System.out.println("Responce :  "+response.code());
+                System.out.println("Responce :  " + response.code());
                 if (response.body() != null) {
                     listViewModel.updateData(response.body().getBorrowersList());
                 }
@@ -134,16 +136,6 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
         });
     }
 
-    Observer<ArrayList<Borrower>> userListUpdateObserver = new Observer<ArrayList<Borrower>>() {
-        @Override
-        public void onChanged(ArrayList<Borrower> userArrayList) {
-            recyclerViewAdapter = new RecyclerListAdapter(getActivity(), userArrayList);
-            LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            recyclerView.setLayoutManager(verticalLayoutManager);
-            recyclerView.setAdapter(recyclerViewAdapter);
-        }
-    };
-
     @Override
     public boolean onBackPressed() {
         if (borrowerCard.getVisibility() == View.VISIBLE) {
@@ -154,11 +146,12 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
         }
     }
 
-    private class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ListViewHolder>{
+    private class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ListViewHolder> {
 
         final Activity context;
-        final ArrayList<Borrower> borrowerArrayList;
-        public RecyclerListAdapter(Activity context, ArrayList<Borrower> borrowerArrayList) {
+        final ArrayList<BorrowerResponse.Borrower> borrowerArrayList;
+
+        public RecyclerListAdapter(Activity context, ArrayList<BorrowerResponse.Borrower> borrowerArrayList) {
             this.borrowerArrayList = borrowerArrayList;
             this.context = context;
         }
@@ -179,15 +172,15 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
 
         @Override
         public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-            Borrower listValue = borrowerArrayList.get(position);
-            System.out.println("listValue "+listValue.getFirstName());
+            BorrowerResponse.Borrower listValue = borrowerArrayList.get(position);
+            System.out.println("listValue " + listValue.getFirstName());
             holder.userName.setText(listValue.getFirstName());
             holder.circleName.setText(String.valueOf(listValue.getFirstName().toUpperCase().charAt(0)));
             holder.pendingAmount.setText(listValue.getMobile());
             holder.delete.setOnClickListener(v -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                builder.setMessage(String.format("Are you sure to delete %s",listValue.getFirstName()));
+                builder.setMessage(String.format("Are you sure to delete %s", listValue.getFirstName()));
                 builder.setPositiveButton("Yes", (dialog, which) -> {
                     deleteBorrower(position);
                     // Delete Call

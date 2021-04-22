@@ -5,80 +5,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.collection.CreateFragment">
+
     <com.google.android.material.card.MaterialCardView
-        app:cardCornerRadius="@dimen/form_element_radius"
-        app:contentPadding="10dp"
-        android:layout_margin="@dimen/outer_layout_margin"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/outer_layout_margin"
+        app:cardCornerRadius="@dimen/form_element_radius"
+        app:contentPadding="10dp">
+
         <LinearLayout
-            android:layout_margin="@dimen/inner_layout_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/inner_layout_margin"
             android:gravity="center"
             android:orientation="vertical">
+
             <ScrollView
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/inner_layout_margin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/inner_layout_margin"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="@dimen/inner_layout_margin"
+                        android:drawableStart="@drawable/ic_collections_24"
+                        android:gravity="center"
                         android:padding="@dimen/content_margin"
                         android:text="Add New Collection"
-                        android:drawableStart="@drawable/ic_collections_24"
                         android:textColor="@color/primaryLite"
-                        android:textSize="25sp"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:textSize="25sp" />
+
                     <com.google.android.material.button.MaterialButton
-                        android:layout_gravity="bottom"
                         android:id="@+id/employee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
                         android:text="Select Employee"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        app:cornerRadius="@dimen/form_element_radius" />
+
                     <com.google.android.material.button.MaterialButton
-                        android:layout_gravity="bottom"
                         android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
                         android:text="Select Status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        app:cornerRadius="@dimen/form_element_radius" />
+
                     <com.google.android.material.button.MaterialButton
-                        android:layout_gravity="bottom"
                         android:id="@+id/collection_date"
-                        android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
-                        android:text="Collection Date"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <com.google.android.material.button.MaterialButton
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:id="@+id/paid_date"
                         android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
-                        android:text="Paid Date"
+                        android:text="Collection Date"
+                        app:cornerRadius="@dimen/form_element_radius" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/paid_date"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Paid Date"
+                        app:cornerRadius="@dimen/form_element_radius" />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/createCollection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
                         android:text="Create"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        app:cornerRadius="@dimen/form_element_radius" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

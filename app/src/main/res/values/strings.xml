@@ -3,7 +3,6 @@
     <string name="nav_header_title">Anjaneya Associates</string>
     <string name="nav_header_subtitle">Chennai</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_collection">Collections</string>
@@ -12,12 +11,6 @@
     <string name="welcome_message">Welcome to Anjaneya Associates</string>
     <string name="menu_borrowers">Borrowers</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-
-    <string-array name="branch_s">
-        <item>Chennai</item>
-        <item>Coimbatore</item>
-        <item>Namakkal</item>
-    </string-array>
+    <string name="title_activity_profile">Edit Profile</string>
 
 </resources>

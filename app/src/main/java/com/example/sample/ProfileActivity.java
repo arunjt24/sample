@@ -15,14 +15,15 @@ import org.json.JSONObject;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button username,password,User_update,Password_update;
-    private LinearLayout f_username_update,f_password_update,update_user;
-    private TextInputEditText old_username,new_username,conform_password,old_password,new_password;
+    private Button username, password, User_update, Password_update;
+    private LinearLayout f_username_update, f_password_update, update_user;
+    private TextInputEditText old_username, new_username, conform_password, old_password, new_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user);
+
         username = findViewById(R.id.update_user_name);
         password = findViewById(R.id.update_user_password);
         f_password_update = findViewById(R.id.f_password_update);
@@ -37,38 +38,49 @@ public class ProfileActivity extends AppCompatActivity {
         conform_password = findViewById(R.id.conform_password);
         username.setText("Update UserName");
         password.setText("Update Password");
-        username.setOnClickListener(n->{
+        username.setOnClickListener(n -> {
             update_user.setVisibility(View.GONE);
             f_username_update.setVisibility(View.VISIBLE);
         });
-        password.setOnClickListener(n->{
+        password.setOnClickListener(n -> {
             update_user.setVisibility(View.GONE);
             f_password_update.setVisibility(View.VISIBLE);
         });
-        Password_update.setOnClickListener(n->{
+        Password_update.setOnClickListener(n -> {
             String oldpassword = old_password.getText().toString();
             String newpassword = new_password.getText().toString();
             String conformpassword = conform_password.getText().toString();
             JSONObject data = new JSONObject();
             try {
-                data.put("Employeeid","1");
-                data.put("OldPassword",oldpassword);
+                data.put("Employeeid", "1");
+                data.put("OldPassword", oldpassword);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if(newpassword == conformpassword)
-                 HttpClient.update_pass(data);
+            if (newpassword == conformpassword)
+                HttpClient.update_pass(data);
         });
-        update_user.setOnClickListener(n->{
+        update_user.setOnClickListener(n -> {
             JSONObject data = new JSONObject();
             try {
-                data.put("Username",new_username.getText().toString());
-                data.put("Employeeid","1");
+                data.put("Username", new_username.getText().toString());
+                data.put("Employeeid", "1");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             HttpClient.update_user(data);
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (update_user.getVisibility() == View.VISIBLE)
+            super.onBackPressed();
+        else {
+            f_username_update.setVisibility(View.GONE);
+            f_password_update.setVisibility(View.GONE);
+            update_user.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -1,127 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_gravity="center_vertical"
-    android:paddingTop="200dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    android:paddingTop="200dp"
     tools:context=".ProfileActivity">
-  <LinearLayout
-      android:id="@+id/update_user"
-      android:layout_width="match_parent"
-      android:layout_gravity="center_vertical"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
 
-    <Button
-        android:id="@+id/update_user_name"
+    <LinearLayout
+        android:id="@+id/update_user"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-    </Button>
-    <Button
-        android:id="@+id/update_user_password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-    </Button>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-  </LinearLayout>
-  <LinearLayout
-      android:orientation="vertical"
-      android:id="@+id/f_username_update"
-      android:layout_width="match_parent"
-      android:visibility="gone"
-      android:layout_height="wrap_content">
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/TextInput"
-        app:startIconDrawable="@drawable/ic_user_24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputEditText
-          android:hint="Old UserName"
-          android:id="@+id/old_username"
-          android:inputType="textCapSentences"
-          android:importantForAutofill="no"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/TextInput"
-        app:startIconDrawable="@drawable/ic_user_24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputEditText
-          android:hint="New UserName"
-          android:id="@+id/new_username"
-          android:inputType="textCapSentences"
-          android:importantForAutofill="no"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/update_user_name_button"
-        android:layout_gravity="bottom"
-        android:padding="@dimen/button_padding"
-        app:cornerRadius="@dimen/form_element_radius"
-        android:text="Update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/update_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/inner_layout_margin"
+            android:padding="@dimen/layout_padding"
+            android:text="Update Username"></Button>
 
-  </LinearLayout>
-  <LinearLayout
-      android:orientation="vertical"
-      android:id="@+id/f_password_update"
-      android:layout_width="match_parent"
-      android:visibility="gone"
-      android:layout_height="wrap_content">
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/PasswordInput"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        <Button
+            android:id="@+id/update_user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/inner_layout_margin"
+            android:padding="@dimen/layout_padding"
+            android:text="Update Password"></Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/f_username_update"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputEditText
-          android:maxLines="1"
-          android:hint="Old Password"
-          android:id="@+id/old_password"
-          android:inputType="textPassword"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/PasswordInput"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/inner_layout_margin"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_padding"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_user_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/old_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Old UserName"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_user_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New UserName"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update_user_name_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/button_padding"
+            android:text="Update"
+            app:cornerRadius="@dimen/form_element_radius" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/f_password_update"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputEditText
-          android:maxLines="1"
-          android:id="@+id/new_password"
-          android:hint="New Password"
-          android:inputType="textPassword"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/PasswordInput"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputEditText
-          android:maxLines="1"
-          android:id="@+id/conform_password"
-          android:hint="Conform Password"
-          android:inputType="textPassword"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.button.MaterialButton
-        android:layout_gravity="bottom"
-        android:padding="@dimen/button_padding"
-        android:id="@+id/update_password_button"
-        app:cornerRadius="@dimen/form_element_radius"
-        android:text="Update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-  </LinearLayout>
-  </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/inner_layout_margin"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_padding"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/PasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/old_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Old Password"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/PasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/PasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/conform_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Conform Password"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update_password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/button_padding"
+            android:text="Update"
+            app:cornerRadius="@dimen/form_element_radius" />
+    </LinearLayout>
+</LinearLayout>

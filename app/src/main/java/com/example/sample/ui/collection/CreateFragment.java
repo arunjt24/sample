@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sample.MainActivity;
@@ -91,15 +89,15 @@ public class CreateFragment extends Fragment {
     private void collectionDate() {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(getActivity(), (view, year, month, dayOfMonth) -> {
-            collectionDate.setText(String.format(Locale.getDefault(),"%d/%d/%d",dayOfMonth,month,year));
-        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+            collectionDate.setText(String.format(Locale.getDefault(), "%d/%d/%d", dayOfMonth, month, year));
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void paidDate() {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(getActivity(), (view, year, month, dayOfMonth) -> {
-            paidDate.setText(String.format(Locale.getDefault(),"%d/%d/%d",dayOfMonth,month,year));
-        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+            paidDate.setText(String.format(Locale.getDefault(), "%d/%d/%d", dayOfMonth, month, year));
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void createCollection() {

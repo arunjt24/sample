@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sample.R;
 import com.example.sample.client.HttpClient;
-import com.example.sample.model.Borrower;
+import com.example.sample.model.BorrowerResponse;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,10 +64,10 @@ public class CreateFragment extends Fragment {
                 monthlyIncome.getText() != null &&
                 kycProof.getText() != null &&
                 referenceName.getText() != null &&
-                referenceMobile.getText() != null ) {
+                referenceMobile.getText() != null) {
 
             create.setOnClickListener(v -> {
-                Borrower borrower = new Borrower();
+                BorrowerResponse.Borrower borrower = new BorrowerResponse.Borrower();
                 borrower.setFirstName(firstName.getText().toString());
                 borrower.setFatherName(fatherName.getText().toString());
                 borrower.setEmail(eMail.getText().toString());
@@ -79,19 +78,19 @@ public class CreateFragment extends Fragment {
                 borrower.setProof(kycProof.getText().toString());
                 borrower.setReferenceName(referenceName.getText().toString());
                 borrower.setReferencMobile(referenceMobile.getText().toString());
-                HttpClient.createBorrower(borrower).enqueue(new Callback<Borrower>() {
+                HttpClient.createBorrower(borrower).enqueue(new Callback<BorrowerResponse.Borrower>() {
                     @Override
-                    public void onResponse(Call<Borrower> call, Response<Borrower> response) {
-                        System.out.println("response.body() "+response.body().toString());
+                    public void onResponse(Call<BorrowerResponse.Borrower> call, Response<BorrowerResponse.Borrower> response) {
+                        System.out.println("response.body() " + response.body().toString());
                     }
 
                     @Override
-                    public void onFailure(Call<Borrower> call, Throwable t) {
+                    public void onFailure(Call<BorrowerResponse.Borrower> call, Throwable t) {
                         t.printStackTrace();
 
                     }
                 });
-                System.out.println("Borrower Model : "+borrower.toString());
+                System.out.println("Borrower Model : " + borrower.toString());
             });
         }
         return root;

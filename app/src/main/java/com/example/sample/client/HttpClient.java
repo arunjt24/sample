@@ -1,27 +1,20 @@
 package com.example.sample.client;
 
-import com.example.sample.model.Borrower;
-import com.example.sample.model.Login;
 import com.example.sample.model.BorrowerResponse;
+import com.example.sample.model.BranchResponse;
+import com.example.sample.model.EmployeeResponse;
+import com.example.sample.model.Login;
 import com.example.sample.model.User;
+import com.example.sample.util.Config;
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import com.example.sample.util.Config;
-import com.google.gson.JsonObject;
-
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
-import okhttp3.Authenticator;
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
-import okhttp3.Route;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -32,7 +25,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Url;
 
 public class HttpClient {
-    private static Gson gson = new Gson();
     public static OkHttpClient client = new OkHttpClient.Builder()
             .authenticator((route, response) -> {
                 String credential = Credentials.basic(Config.AUTH_USER_NAME, Config.AUTH_PASSWORD);
@@ -42,6 +34,7 @@ public class HttpClient {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .build();
+    private static Gson gson = new Gson();
     private static Retrofit retrofit;
 
     private static Retrofit getClient() {
@@ -65,13 +58,12 @@ public class HttpClient {
         System.out.println(login.getUserPassword());
         return getServerApi().doLogin(login);
     }
-    public  static Call<JSONObject> update_pass(JSONObject data)
-    {
+
+    public static Call<JSONObject> update_pass(JSONObject data) {
         return getServerApi().update_password(data);
     }
 
-    public  static Call<JSONObject> update_user(JSONObject data)
-    {
+    public static Call<JSONObject> update_user(JSONObject data) {
         return getServerApi().update_username(data);
     }
 
@@ -79,16 +71,24 @@ public class HttpClient {
         return getServerApi().getBorrowers();
     }
 
-    public static Call<Borrower> createBorrower(Borrower borrower) {
+    public static Call<BorrowerResponse.Borrower> createBorrower(BorrowerResponse.Borrower borrower) {
         return getServerApi().createBorrower(borrower);
     }
 
-    public static Call<Borrower> editBorrower(Borrower borrower) {
+    public static Call<String> editBorrower(BorrowerResponse.Borrower borrower) {
         return getServerApi().editBorrower(borrower);
     }
 
     public static Call<ResponseBody> downloadApk(String url) {
         return getServerApi().download(url);
+    }
+
+    public static Call<BranchResponse> getBranches() {
+        return getServerApi().getBranches();
+    }
+
+    public static Call<EmployeeResponse> getEmployees() {
+        return getServerApi().getEmployees();
     }
 
     public interface FinanceAPI {
@@ -101,20 +101,27 @@ public class HttpClient {
         @GET("borrowerslist.php")
         Call<BorrowerResponse> getBorrowers();
 
+        @GET("employeelist.php")
+        Call<EmployeeResponse> getEmployees();
+
+        @GET("allbranch.php")
+        Call<BranchResponse> getBranches();
+
         @POST("login.php")
         Call<User> doLogin(@Body Login body);
 
         @POST("addborrowers.php")
-        Call<Borrower> createBorrower(@Body Borrower borrower);
+        Call<BorrowerResponse.Borrower> createBorrower(@Body BorrowerResponse.Borrower borrower);
 
         @POST("editborrowers.php")
-        Call<Borrower> editBorrower(@Body Borrower borrower);
+        Call<String> editBorrower(@Body BorrowerResponse.Borrower borrower);
 
         @POST("updatepassword.php")
         Call<JSONObject> update_password(@Body JSONObject body);
 
         @POST("updateusername.php")
         Call<JSONObject> update_username(@Body JSONObject body);
+
     }
 
 }

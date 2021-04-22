@@ -6,12 +6,11 @@ import android.content.SharedPreferences;
 
 public class Preference {
 
+    public static String keyUserLoggedIn = "userLoggedIn";
     private final Context context;
     private final String PREFERENCES_NAME = "com.finance.";
     private final SharedPreferences preference;
     private final SharedPreferences.Editor editor;
-
-    public static String keyUserLoggedIn = "userLoggedIn";
 
     @SuppressLint("CommitPrefEdits")
     public Preference(Context context) {
@@ -26,6 +25,6 @@ public class Preference {
     }
 
     public Boolean isUserLoggedIn() {
-        return preference.getBoolean(keyUserLoggedIn,false);
+        return preference.getBoolean(keyUserLoggedIn, false);
     }
 }

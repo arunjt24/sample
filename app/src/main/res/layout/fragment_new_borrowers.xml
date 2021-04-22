@@ -1,183 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/content_margin"
     tools:context=".ui.collection.CreateFragment">
+
     <com.google.android.material.card.MaterialCardView
-        app:cardCornerRadius="@dimen/form_element_radius"
-        android:layout_margin="@dimen/outer_layout_margin"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/outer_layout_margin"
+        app:cardCornerRadius="@dimen/form_element_radius">
+
         <LinearLayout
-            android:layout_margin="@dimen/inner_layout_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/inner_layout_margin"
             android:gravity="center"
             android:orientation="vertical">
+
             <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/inner_layout_margin"
+                android:gravity="start"
                 android:padding="@dimen/content_margin"
                 android:text="Add New Borrower"
                 android:textColor="@color/primaryLite"
-                android:textSize="22sp"
-                android:gravity="start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textSize="22sp" />
+
             <ScrollView
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <LinearLayout
-                    android:layout_margin="@dimen/inner_layout_margin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/inner_layout_margin"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/first_name"
-                            android:hint="First Name"
-                            android:text="Arun"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="First Name"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="Arun" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/father_name"
-                            android:text="Gold"
-                            android:hint="Father Name"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Father Name"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="Gold" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/e_mail"
-                            android:hint="E-Mail"
-                            android:text="text@test.com"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="E-Mail"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="text@test.com" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/mobile_number"
-                            android:hint="Mobile Number"
-                            android:text="9879879879"
-                            android:inputType="number"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile Number"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:text="9879879879" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/address"
-                            android:hint="Address"
-                            android:text="TNJ"
-                            android:maxLines="10"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Address"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:maxLines="10"
+                            android:text="TNJ" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/occupation"
-                            android:hint="Occupation"
-                            android:text="TEST"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Occupation"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="TEST" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/monthly_income"
-                            android:hint="Monthly Income"
-                            android:text="1000"
-                            android:inputType="number"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Monthly Income"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:text="1000" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/proof_no"
-                            android:hint="PROOF NO"
-                            android:text="12345"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="PROOF NO"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="12345" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/reference_name"
-                            android:hint="Reference Name"
-                            android:text="Arun"
-                            android:inputType="text"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Reference Name"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="Arun" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/reference_mobile"
-                            android:hint="Reference Mobile"
-                            android:text="9879879876"
-                            android:inputType="phone"
-                            android:importantForAutofill="no"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Reference Mobile"
+                            android:importantForAutofill="no"
+                            android:inputType="phone"
+                            android:text="9879879876" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </ScrollView>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/createBorrower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:padding="@dimen/button_padding"
-                app:cornerRadius="@dimen/form_element_radius"
                 android:text="Create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                app:cornerRadius="@dimen/form_element_radius" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

@@ -19,25 +19,25 @@ public class ListViewModel extends ViewModel {
     private void initData() {
         int amount = 1500;
         stringArrayList = new ArrayList<>();
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("A Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("B Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("C Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("D Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("E Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("F Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("G Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("H Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("I Arun", amount));
-        amount = amount +1;
+        amount = amount + 1;
         stringArrayList.add(new User("J Arun", amount));
     }
 

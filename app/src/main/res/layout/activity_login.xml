@@ -1,112 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:orientation="vertical"
     android:background="@color/primary"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
+
     <com.google.android.material.card.MaterialCardView
-        app:cardCornerRadius="@dimen/form_element_radius"
-        app:contentPadding="10dp"
-        android:layout_margin="@dimen/outer_layout_margin"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/outer_layout_margin"
+        app:cardCornerRadius="@dimen/form_element_radius"
+        app:contentPadding="10dp">
+
         <LinearLayout
-            android:layout_margin="@dimen/inner_layout_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/inner_layout_margin"
             android:gravity="center"
             android:orientation="vertical">
+
             <ScrollView
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <LinearLayout
-                    android:layout_margin="@dimen/inner_layout_margin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/inner_layout_margin"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
-                        android:layout_margin="@dimen/content_margin"
-                        android:src="@drawable/logo"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:layout_margin="@dimen/content_margin"
+                        android:src="@drawable/logo"
                         tools:ignore="ContentDescription" />
+
                     <TextView
-                        android:padding="@dimen/content_padding"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_margin="@dimen/content_margin"
                         android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/header_text_size"
+                        android:padding="@dimen/content_padding"
                         android:text="@string/welcome_message"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"/>
+                        android:textAlignment="center"
+                        android:textSize="@dimen/header_text_size" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/selectBranch"
-                        android:layout_margin="@dimen/content_margin"
-                        android:layout_gravity="bottom"
-                        android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
-                        android:text="Select Branch"
-                        android:onClick="showBranches"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="@dimen/content_margin"
+                        android:onClick="showBranches"
+                        android:padding="@dimen/button_padding"
+                        android:text="Select Branch"
+                        app:cornerRadius="@dimen/form_element_radius" />
 
                     <TextView
                         android:id="@+id/loginMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:padding="@dimen/content_padding"
-                        android:visibility="invisible"
                         android:text="Invalid username or password"
                         android:textColor="@color/danger"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:visibility="invisible" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/TextInput"
                         android:id="@+id/nameInput"
-                        app:startIconDrawable="@drawable/ic_user_24"
+                        style="@style/TextInput"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/ic_user_24">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:maxLines="1"
-                            android:hint="Username"
                             android:id="@+id/email"
-                            android:inputType="textPersonName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Username"
                             android:importantForAutofill="no"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:inputType="textPersonName"
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/PasswordInput"
                         android:id="@+id/passwordInput"
-                        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                        style="@style/PasswordInput"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:maxLines="1"
-                            android:hint="Password"
                             android:id="@+id/password"
-                            android:inputType="textPassword"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:hint="Password"
+                            android:inputType="textPassword"
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:layout_margin="@dimen/content_margin"
-                        android:layout_gravity="bottom"
-                        android:padding="@dimen/button_padding"
-                        app:cornerRadius="@dimen/form_element_radius"
-                        android:text="Login"
-                        android:onClick="doLogin"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="@dimen/content_margin"
+                        android:onClick="doLogin"
+                        android:padding="@dimen/button_padding"
+                        android:text="Login"
+                        app:cornerRadius="@dimen/form_element_radius" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

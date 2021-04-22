@@ -26,6 +26,15 @@ public class ListFragment extends Fragment implements LifecycleOwner {
     private ListViewModel listViewModel;
     private RecyclerListAdapter recyclerViewAdapter;
     private RecyclerView recyclerView;
+    Observer<ArrayList<ListViewModel.User>> userListUpdateObserver = new Observer<ArrayList<ListViewModel.User>>() {
+        @Override
+        public void onChanged(ArrayList<ListViewModel.User> userArrayList) {
+            recyclerViewAdapter = new RecyclerListAdapter(getActivity(), userArrayList);
+            LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setLayoutManager(verticalLayoutManager);
+            recyclerView.setAdapter(recyclerViewAdapter);
+        }
+    };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,20 +46,11 @@ public class ListFragment extends Fragment implements LifecycleOwner {
         return root;
     }
 
-    Observer<ArrayList<ListViewModel.User>> userListUpdateObserver = new Observer<ArrayList<ListViewModel.User>>() {
-        @Override
-        public void onChanged(ArrayList<ListViewModel.User> userArrayList) {
-            recyclerViewAdapter = new RecyclerListAdapter(getActivity(), userArrayList);
-            LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            recyclerView.setLayoutManager(verticalLayoutManager);
-            recyclerView.setAdapter(recyclerViewAdapter);
-        }
-    };
-
-    private static class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ListViewHolder>{
+    private static class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ListViewHolder> {
 
         final Activity context;
         final ArrayList<ListViewModel.User> userArrayList;
+
         public RecyclerListAdapter(Activity context, ArrayList<ListViewModel.User> userArrayList) {
             this.userArrayList = userArrayList;
             this.context = context;
@@ -73,10 +73,10 @@ public class ListFragment extends Fragment implements LifecycleOwner {
         @Override
         public void onBindViewHolder(@NonNull RecyclerListAdapter.ListViewHolder holder, int position) {
             ListViewModel.User listValue = userArrayList.get(position);
-            System.out.println("listValue "+listValue.name);
+            System.out.println("listValue " + listValue.name);
             holder.userName.setText(listValue.name);
             holder.circleName.setText(String.valueOf(listValue.name.charAt(0)));
-            holder.pendingAmount.setText(String.format(Locale.getDefault(),"PENDING - %d",listValue.pendingAmount));
+            holder.pendingAmount.setText(String.format(Locale.getDefault(), "PENDING - %d", listValue.pendingAmount));
             holder.itemCard.setOnClickListener(v -> {
                 /*Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("userName", holder.userName.getText().toString());

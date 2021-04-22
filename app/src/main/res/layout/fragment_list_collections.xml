@@ -6,25 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.collection.ListFragment">
 
-    <ScrollView
-        android:padding="@dimen/layout_padding"
-        android:fillViewport="true"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="UselessParent">
-        <LinearLayout
-            android:animateLayoutChanges="true"
-            android:padding="@dimen/layout_padding"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal" >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_margin="@dimen/content_margin"
+        android:padding="@dimen/layout_padding"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>

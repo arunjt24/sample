@@ -4,26 +4,26 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class BorrowerResponse {
+public class EmployeeResponse {
     @SerializedName("success")
     private Integer success;
 
-    @SerializedName("borrowerslist")
-    private ArrayList<Borrower> borrowersList;
+    @SerializedName("employeeslist")
+    private ArrayList<Employee> employeesList;
 
-    public ArrayList<Borrower> getBorrowersList() {
-        return borrowersList;
+    public ArrayList<Employee> getEmployeesList() {
+        return employeesList;
     }
 
-    public static class Borrower {
-        @SerializedName("Borrowersid")
-        private String borrowersId;
+    public static class Employee {
+        @SerializedName("Employeesid")
+        private String employeesId;
 
         //    @SerializedName("Branchid")
         //    private String branchid;
 
-        @SerializedName("Borrowerscode")
-        private String borrowersCode;
+        @SerializedName("Employeescode")
+        private String employeesCode;
 
         @SerializedName("Firstname")
         private String firstName;
@@ -56,12 +56,12 @@ public class BorrowerResponse {
         private String referencMobile;
 
 
-        public String getBorrowersId() {
-            return borrowersId;
+        public String getEmployeesId() {
+            return employeesId;
         }
 
-        public void setBorrowersId(String borrowersId) {
-            this.borrowersId = borrowersId;
+        public void setEmployeesId(String employeesId) {
+            this.employeesId = employeesId;
         }
 
         //    public String getBranchid() {
@@ -72,12 +72,12 @@ public class BorrowerResponse {
         //        this.branchid = branchid;
         //    }
 
-        public String getBorrowersCode() {
-            return borrowersCode;
+        public String getEmployeesCode() {
+            return employeesCode;
         }
 
-        public void setBorrowersCode(String borrowersCode) {
-            this.borrowersCode = borrowersCode;
+        public void setEmployeesCode(String employeesCode) {
+            this.employeesCode = employeesCode;
         }
 
         public String getFirstName() {
@@ -162,9 +162,9 @@ public class BorrowerResponse {
 
         @Override
         public String toString() {
-            return "Borrower{" +
-                    "borrowersId='" + borrowersId + '\'' +
-                    ", borrowersCode='" + borrowersCode + '\'' +
+            return "Employee{" +
+                    "employeesId='" + employeesId + '\'' +
+                    ", employeesCode='" + employeesCode + '\'' +
                     ", firstName='" + firstName + '\'' +
                     ", fatherName='" + fatherName + '\'' +
                     ", mobile='" + mobile + '\'' +

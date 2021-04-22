@@ -4,22 +4,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.sample.model.Borrower;
+import com.example.sample.model.BorrowerResponse;
 
 public class CreateViewModel extends ViewModel {
 
-    private final MutableLiveData<Borrower> borrowerData;
+    private final MutableLiveData<BorrowerResponse.Borrower> borrowerData;
 
     public CreateViewModel() {
         borrowerData = new MutableLiveData<>();
-        borrowerData.setValue(new Borrower());
+        borrowerData.setValue(new BorrowerResponse.Borrower());
     }
 
-    public void updateBorrowerContent(Borrower borrower) {
+    public void updateBorrowerContent(BorrowerResponse.Borrower borrower) {
         borrowerData.postValue(borrower);
     }
 
-    public LiveData<Borrower> getBorrower() {
+    public LiveData<BorrowerResponse.Borrower> getBorrower() {
         return borrowerData;
     }
 }
