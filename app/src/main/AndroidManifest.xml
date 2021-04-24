@@ -18,11 +18,11 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Sample.NoActionBar">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".ProfileActivity"
@@ -34,11 +34,11 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
     </application>
 

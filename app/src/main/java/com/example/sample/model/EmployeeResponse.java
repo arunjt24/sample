@@ -8,174 +8,55 @@ public class EmployeeResponse {
     @SerializedName("success")
     private Integer success;
 
-    @SerializedName("employeeslist")
+    @SerializedName("branchlist")
     private ArrayList<Employee> employeesList;
 
     public ArrayList<Employee> getEmployeesList() {
         return employeesList;
     }
 
-    public static class Employee {
-        @SerializedName("Employeesid")
-        private String employeesId;
+    public class Employee {
 
-        //    @SerializedName("Branchid")
-        //    private String branchid;
+        @SerializedName("Branchid")
+        private String branchid;
+        @SerializedName("Employeecode")
+        private String employeecode;
+        @SerializedName("Employeeid")
+        private String employeeid;
+        @SerializedName("Username")
+        private String username;
 
-        @SerializedName("Employeescode")
-        private String employeesCode;
-
-        @SerializedName("Firstname")
-        private String firstName;
-
-        @SerializedName("Fathername")
-        private String fatherName;
-
-        @SerializedName("Mobile")
-        private String mobile;
-
-        @SerializedName("Email")
-        private String email;
-
-        @SerializedName("Address")
-        private String address;
-
-        @SerializedName("Occupation")
-        private String occupation;
-
-        @SerializedName("Monthlyincome")
-        private String monthlyIncome;
-
-        @SerializedName("Proof")
-        private String proof;
-
-        @SerializedName("Refferecename")
-        private String referenceName;
-
-        @SerializedName("Refferecemobile")
-        private String referencMobile;
-
-
-        public String getEmployeesId() {
-            return employeesId;
+        public String getBranchid() {
+            return branchid;
         }
 
-        public void setEmployeesId(String employeesId) {
-            this.employeesId = employeesId;
+        public void setBranchid(String branchid) {
+            this.branchid = branchid;
         }
 
-        //    public String getBranchid() {
-        //        return branchid;
-        //    }
-        //
-        //    public void setBranchid(String branchid) {
-        //        this.branchid = branchid;
-        //    }
-
-        public String getEmployeesCode() {
-            return employeesCode;
+        public String getEmployeecode() {
+            return employeecode;
         }
 
-        public void setEmployeesCode(String employeesCode) {
-            this.employeesCode = employeesCode;
+        public void setEmployeecode(String employeecode) {
+            this.employeecode = employeecode;
         }
 
-        public String getFirstName() {
-            return firstName;
+        public String getEmployeeid() {
+            return employeeid;
         }
 
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
+        public void setEmployeeid(String employeeid) {
+            this.employeeid = employeeid;
         }
 
-        public String getFatherName() {
-            return fatherName;
+        public String getUsername() {
+            return username;
         }
 
-        public void setFatherName(String fatherName) {
-            this.fatherName = fatherName;
+        public void setUsername(String username) {
+            this.username = username;
         }
 
-        public String getMobile() {
-            return mobile;
-        }
-
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getOccupation() {
-            return occupation;
-        }
-
-        public void setOccupation(String occupation) {
-            this.occupation = occupation;
-        }
-
-        public String getMonthlyIncome() {
-            return monthlyIncome;
-        }
-
-        public void setMonthlyIncome(String monthlyIncome) {
-            this.monthlyIncome = monthlyIncome;
-        }
-
-        public String getProof() {
-            return proof;
-        }
-
-        public void setProof(String proof) {
-            this.proof = proof;
-        }
-
-        public String getReferenceName() {
-            return referenceName;
-        }
-
-        public void setReferenceName(String referenceName) {
-            this.referenceName = referenceName;
-        }
-
-        public String getReferencMobile() {
-            return referencMobile;
-        }
-
-        public void setReferencMobile(String referencMobile) {
-            this.referencMobile = referencMobile;
-        }
-
-        @Override
-        public String toString() {
-            return "Employee{" +
-                    "employeesId='" + employeesId + '\'' +
-                    ", employeesCode='" + employeesCode + '\'' +
-                    ", firstName='" + firstName + '\'' +
-                    ", fatherName='" + fatherName + '\'' +
-                    ", mobile='" + mobile + '\'' +
-                    ", email='" + email + '\'' +
-                    ", address='" + address + '\'' +
-                    ", occupation='" + occupation + '\'' +
-                    ", monthlyIncome='" + monthlyIncome + '\'' +
-                    ", proof='" + proof + '\'' +
-                    ", referenceName='" + referenceName + '\'' +
-                    ", referencMobile='" + referencMobile + '\'' +
-                    '}';
-        }
     }
 }

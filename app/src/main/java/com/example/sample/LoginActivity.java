@@ -1,5 +1,6 @@
 package com.example.sample;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import com.example.sample.client.HttpClient;
 import com.example.sample.model.BranchResponse;
 import com.example.sample.model.Login;
 import com.example.sample.model.User;
+import com.example.sample.util.Preference;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -39,10 +41,24 @@ public class LoginActivity extends AppCompatActivity {
     private TextView loginMessage;
     private List<BranchResponse.Branch> branchList = new ArrayList<>();
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, LoginActivity.class);
+        starter.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(starter);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        new Preference(this).init();
+
+        if (Preference.isUserLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+            return;
+        }
+
         initValues();
         initViews();
     }
@@ -148,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     if (user != null) {
                         if (user.getSuccess() == 1) {
+                            Preference.setUserLoggedIn(user.getEmployeeId(),user.getBranchId());
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else {

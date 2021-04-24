@@ -114,4 +114,19 @@ public class User {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "success=" + success +
+                ", message='" + message + '\'' +
+                ", employeeId='" + employeeId + '\'' +
+                ", branchId='" + branchId + '\'' +
+                ", employeecode='" + employeecode + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", address='" + address + '\'' +
+                ", image='" + image + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

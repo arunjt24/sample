@@ -2,13 +2,14 @@ package com.example.sample.client;
 
 import com.example.sample.model.BorrowerResponse;
 import com.example.sample.model.BranchResponse;
+import com.example.sample.model.CollectionTypeResponse;
 import com.example.sample.model.EmployeeResponse;
 import com.example.sample.model.Login;
 import com.example.sample.model.User;
 import com.example.sample.util.Config;
+import com.example.sample.util.Preference;
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -59,12 +60,12 @@ public class HttpClient {
         return getServerApi().doLogin(login);
     }
 
-    public static Call<JSONObject> update_pass(JSONObject data) {
-        return getServerApi().update_password(data);
+    public static Call<String> updatePassword(JsonObject data) {
+        return getServerApi().updatePassword(data);
     }
 
-    public static Call<JSONObject> update_user(JSONObject data) {
-        return getServerApi().update_username(data);
+    public static Call<String> updateUsername(JsonObject data) {
+        return getServerApi().updateUsername(data);
     }
 
     public static Call<BorrowerResponse> getBorrowers() {
@@ -88,7 +89,19 @@ public class HttpClient {
     }
 
     public static Call<EmployeeResponse> getEmployees() {
-        return getServerApi().getEmployees();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("Branchid", Preference.getBranchID());
+        return getServerApi().getEmployees(jsonObject);
+    }
+
+    public static Call<CollectionTypeResponse> getCollectionTypes() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("Branchid", Preference.getBranchID());
+        return getServerApi().getCollectionTypes(jsonObject);
+    }
+
+    public static void createCollection() {
+
     }
 
     public interface FinanceAPI {
@@ -101,8 +114,11 @@ public class HttpClient {
         @GET("borrowerslist.php")
         Call<BorrowerResponse> getBorrowers();
 
-        @GET("employeelist.php")
-        Call<EmployeeResponse> getEmployees();
+        @POST("employeelist.php")
+        Call<EmployeeResponse> getEmployees(@Body JsonObject jsonObject);
+
+        @POST("collectiontypelist.php")
+        Call<CollectionTypeResponse> getCollectionTypes(@Body JsonObject jsonObject);
 
         @GET("allbranch.php")
         Call<BranchResponse> getBranches();
@@ -117,10 +133,10 @@ public class HttpClient {
         Call<String> editBorrower(@Body BorrowerResponse.Borrower borrower);
 
         @POST("updatepassword.php")
-        Call<JSONObject> update_password(@Body JSONObject body);
+        Call<String> updatePassword(@Body JsonObject body);
 
         @POST("updateusername.php")
-        Call<JSONObject> update_username(@Body JSONObject body);
+        Call<String> updateUsername(@Body JsonObject body);
 
     }
 

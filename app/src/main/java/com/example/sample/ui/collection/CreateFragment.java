@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sample.MainActivity;
 import com.example.sample.R;
+import com.example.sample.client.HttpClient;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Calendar;
@@ -59,7 +60,7 @@ public class CreateFragment extends Fragment {
     private void employee() {
         AlertDialog.Builder employeeAlert = new AlertDialog.Builder(activity);
         employeeAlert.setCancelable(true);
-        String[] branchArray = new String[]{"Arun", "Pandi"};
+        String[] branchArray = activity.getEmployee();
         employeeAlert.setSingleChoiceItems(branchArray, employeeAlertCheckedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -74,7 +75,7 @@ public class CreateFragment extends Fragment {
     private void status() {
         AlertDialog.Builder statusAlert = new AlertDialog.Builder(activity);
         statusAlert.setCancelable(true);
-        String[] branchArray = new String[]{"Paid", "Pending"};
+        String[] branchArray = activity.getCollectionType();
         statusAlert.setSingleChoiceItems(branchArray, statusAlertCheckedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

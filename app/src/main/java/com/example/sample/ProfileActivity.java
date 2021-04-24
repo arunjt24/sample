@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sample.client.HttpClient;
+import com.example.sample.util.Preference;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -22,6 +26,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        new Preference(this).init();
+
         setContentView(R.layout.activity_update_user);
 
         username = findViewById(R.id.update_user_name);
@@ -50,25 +57,44 @@ public class ProfileActivity extends AppCompatActivity {
             String oldpassword = old_password.getText().toString();
             String newpassword = new_password.getText().toString();
             String conformpassword = conform_password.getText().toString();
-            JSONObject data = new JSONObject();
-            try {
-                data.put("Employeeid", "1");
-                data.put("OldPassword", oldpassword);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if (newpassword == conformpassword)
-                HttpClient.update_pass(data);
+            JsonObject data = new JsonObject();
+
+            if (newpassword.equals(conformpassword)) {
+                data.addProperty("Employeeid", Preference.getEmployeeID());
+                data.addProperty("Oldpassword", oldpassword);
+                data.addProperty("Newpassword", newpassword);
+                HttpClient.updatePassword(data).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            } else
+                Toast.makeText(this,"Passwords are not equal",Toast.LENGTH_LONG).show();
         });
         update_user.setOnClickListener(n -> {
-            JSONObject data = new JSONObject();
-            try {
-                data.put("Username", new_username.getText().toString());
-                data.put("Employeeid", "1");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            HttpClient.update_user(data);
+            JsonObject data = new JsonObject();
+            if (old_username.getText().toString().equals(new_username.getText().toString())) {
+                data.addProperty("Username", new_username.getText().toString());
+                data.addProperty("Employeeid", Preference.getEmployeeID());
+                HttpClient.updateUsername(data).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            } else
+                Toast.makeText(this,"Username are not equal",Toast.LENGTH_LONG).show();
         });
 
     }
@@ -82,5 +108,10 @@ public class ProfileActivity extends AppCompatActivity {
             f_password_update.setVisibility(View.GONE);
             update_user.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void logoutUser(View view) {
+        Preference.logout();
+        finish();
     }
 }

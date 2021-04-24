@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.sample.client.HttpClient;
 import com.example.sample.model.BorrowerResponse;
+import com.example.sample.model.CollectionTypeResponse;
 import com.example.sample.model.EmployeeResponse;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
     private NavController navController;
     private View fab;
     private ArrayList<BorrowerResponse.Borrower> borrowersList;
+    private ArrayList<CollectionTypeResponse.Type> collectionType;
+    private ArrayList<EmployeeResponse.Employee> employeeList;
 
     @Override
     public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                 System.out.println("Responce :  " + response.code());
                 if (response.body() != null) {
                     setEmployeeList(response.body().getEmployeesList());
-                    startActivityContents();
+                    getCollectionTypes();
                 } else {
                     getEmployees();
                 }
@@ -108,8 +111,50 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 //        https://greatcoders.in/Financewebservices/employeelist.php
     }
 
-    private void setEmployeeList(ArrayList<EmployeeResponse.Employee> employeeList) {
+    private void getCollectionTypes() {
+        HttpClient.getCollectionTypes().enqueue(new Callback<CollectionTypeResponse>() {
+            @Override
+            public void onResponse(Call<CollectionTypeResponse> call, Response<CollectionTypeResponse> response) {
+                System.out.println("Responce :  " + response.code());
+                if (response.body() != null) {
+                    setCollectionTypes(response.body().getCollectionType());
+                    startActivityContents();
+                } else {
+                    getCollectionTypes();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<CollectionTypeResponse> call, Throwable t) {
+                getCollectionTypes();
+            }
+        });
+    }
+
+    private void setCollectionTypes(ArrayList<CollectionTypeResponse.Type> collectionType) {
+        this.collectionType = collectionType;
+    }
+
+    private void setEmployeeList(ArrayList<EmployeeResponse.Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public String[] getCollectionType() {
+        ArrayList<String> types = new ArrayList<>();
+        for (CollectionTypeResponse.Type type: collectionType) {
+            types.add(type.getCollectionType());
+        }
+
+        return types.toArray(new String[0]);
+    }
+
+    public String[] getEmployee() {
+        ArrayList<String> employees = new ArrayList<>();
+        for (EmployeeResponse.Employee type: employeeList) {
+            employees.add(type.getUsername());
+        }
+
+        return employees.toArray(new String[0]);
     }
 
     @Override

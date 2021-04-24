@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/inner_layout_margin"
             android:padding="@dimen/layout_padding"
-            android:text="Update Username"></Button>
+            android:text="Update Username" />
 
         <Button
             android:id="@+id/update_user_password"
@@ -31,7 +31,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/inner_layout_margin"
             android:padding="@dimen/layout_padding"
-            android:text="Update Password"></Button>
+            android:text="Update Password" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/inner_layout_margin"
+            android:padding="@dimen/layout_padding"
+            android:onClick="logoutUser"
+            android:text="Logout" />
 
     </LinearLayout>
 
