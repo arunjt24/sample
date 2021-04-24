@@ -14,6 +14,7 @@ public class CollectionTypeResponse {
     public ArrayList<Type> getCollectionType() {
         return collectionType;
     }
+
     public class Type {
 
         @SerializedName("intCollectiontypeid")

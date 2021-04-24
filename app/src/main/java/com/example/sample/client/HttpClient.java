@@ -64,6 +64,12 @@ public class HttpClient {
         return getServerApi().updatePassword(data);
     }
 
+    public static Call<String> createcollectionlist(JsonObject data) {
+        return getServerApi().addCollections(data);
+    }
+    public static Call<String> getcollectionlist(JsonObject data) {
+        return getServerApi().getCollections(data);
+    }
     public static Call<String> updateUsername(JsonObject data) {
         return getServerApi().updateUsername(data);
     }
@@ -137,6 +143,12 @@ public class HttpClient {
 
         @POST("updateusername.php")
         Call<String> updateUsername(@Body JsonObject body);
+
+        @POST("collection.php")
+        Call<String> getCollections(@Body JsonObject body);
+
+        @POST("addcollection.php")
+        Call<String> addCollections(@Body JsonObject body);
 
     }
 

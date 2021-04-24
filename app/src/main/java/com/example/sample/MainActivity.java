@@ -19,9 +19,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.sample.client.HttpClient;
 import com.example.sample.model.BorrowerResponse;
+import com.example.sample.model.CollectionList;
 import com.example.sample.model.CollectionTypeResponse;
 import com.example.sample.model.EmployeeResponse;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
     private ArrayList<BorrowerResponse.Borrower> borrowersList;
     private ArrayList<CollectionTypeResponse.Type> collectionType;
     private ArrayList<EmployeeResponse.Employee> employeeList;
+    private ArrayList<CollectionList.Collection> collectionLists;
 
     @Override
     public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
         getBorrower();
 
+        getCollection();
     }
 
     private void startActivityContents() {
@@ -192,6 +196,27 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         });
     }
 
+    public void getCollection(){
+        JsonObject list = new JsonObject();
+//        HttpClient.getcollectionlist(list).enqueue(new Callback<CollectionList>() {
+//            @Override
+//            public void onResponse(Call<CollectionList> call, Response<CollectionList> response) {
+//                System.out.println("Responce :  " + response.code());
+//                if (response.body() != null) {
+//                    setCollectionList(response.body().getCollectionList());
+//
+//                } else {
+//                    getCollection();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CollectionList> call, Throwable t) {
+//                getCollection();
+//            }
+//        });
+    }
+
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
@@ -205,6 +230,10 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
     private void setBorrowersList(ArrayList<BorrowerResponse.Borrower> borrowersList) {
         this.borrowersList = borrowersList;
+    }
+
+    private void setCollectionList(ArrayList<CollectionList.Collection> collectionLists) {
+        this.collectionLists = collectionLists;
     }
 
     @Override
