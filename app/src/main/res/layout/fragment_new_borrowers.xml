@@ -54,8 +54,7 @@
                             android:layout_height="wrap_content"
                             android:hint="First Name"
                             android:importantForAutofill="no"
-                            android:inputType="text"
-                            android:text="Arun" />
+                            android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -69,8 +68,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Father Name"
                             android:importantForAutofill="no"
-                            android:inputType="text"
-                            android:text="Gold" />
+                            android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -84,8 +82,7 @@
                             android:layout_height="wrap_content"
                             android:hint="E-Mail"
                             android:importantForAutofill="no"
-                            android:inputType="text"
-                            android:text="text@test.com" />
+                            android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -99,8 +96,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Mobile Number"
                             android:importantForAutofill="no"
-                            android:inputType="number"
-                            android:text="9879879879" />
+                            android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -115,8 +111,7 @@
                             android:hint="Address"
                             android:importantForAutofill="no"
                             android:inputType="text"
-                            android:maxLines="10"
-                            android:text="TNJ" />
+                            android:maxLines="10" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -130,8 +125,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Occupation"
                             android:importantForAutofill="no"
-                            android:inputType="text"
-                            android:text="TEST" />
+                            android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -145,8 +139,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Monthly Income"
                             android:importantForAutofill="no"
-                            android:inputType="number"
-                            android:text="1000" />
+                            android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -160,8 +153,7 @@
                             android:layout_height="wrap_content"
                             android:hint="PROOF NO"
                             android:importantForAutofill="no"
-                            android:inputType="text"
-                            android:text="12345" />
+                            android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -175,8 +167,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Reference Name"
                             android:importantForAutofill="no"
-                            android:inputType="text"
-                            android:text="Arun" />
+                            android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -190,8 +181,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Reference Mobile"
                             android:importantForAutofill="no"
-                            android:inputType="phone"
-                            android:text="9879879876" />
+                            android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </ScrollView>

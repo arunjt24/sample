@@ -10,10 +10,13 @@ public class DashboardViewModel extends ViewModel {
 
     public DashboardViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Welcome To Chennai Branch");
     }
 
     public LiveData<String> getText() {
         return mText;
+    }
+
+    public void setWelcomeMessage(String welcome) {
+        mText.postValue(welcome);
     }
 }

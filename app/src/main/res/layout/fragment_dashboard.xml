@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,11 +12,247 @@
         android:id="@+id/text_dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
         android:layout_margin="@dimen/inner_layout_margin"
-        android:drawablePadding="@dimen/layout_padding"
-        android:gravity="center"
-        android:padding="@dimen/content_margin"
-        android:textColor="@color/primaryLite"
-        android:textSize="30sp" />
+        android:gravity="start"
+        android:padding="@dimen/layout_padding"
+        android:text="Welcome to branch"
+        android:textColor="@color/secondary"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/text_dashboard">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/investment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/inner_layout_margin"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/inner_layout_margin"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/content_margin"
+                            android:text="Investments Capital"
+                            android:textColor="@color/secondary"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/inner_layout_margin"
+                            android:background="@color/primary"
+                            android:gravity="start"
+                            android:padding="@dimen/content_margin"
+                            android:text="Investments"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/secondaryLite" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/content_margin"
+                        android:paddingTop="@dimen/content_margin"
+                        android:text="Rs   500000.00"
+                        android:textColor="@color/secondary"
+                        android:textSize="35sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/content_margin"
+                        android:paddingBottom="@dimen/content_margin"
+                        android:text="Total Investments Amount"
+                        android:textColor="@color/secondary"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/loans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/investment"
+                android:layout_margin="@dimen/inner_layout_margin"
+                app1:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/inner_layout_margin"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/content_margin"
+                            android:text="Loans Amount"
+                            android:textColor="@color/secondary"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/inner_layout_margin"
+                            android:background="#23c6c8"
+                            android:gravity="start"
+                            android:padding="@dimen/content_margin"
+                            android:text="Loans"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/secondaryLite" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/content_margin"
+                        android:paddingTop="@dimen/content_margin"
+                        android:text="Rs   5000.00"
+                        android:textColor="@color/secondary"
+                        android:textSize="35sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/content_margin"
+                        android:paddingBottom="@dimen/content_margin"
+                        android:text="Total Loan Amount"
+                        android:textColor="@color/secondary"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/loans"
+                android:layout_margin="@dimen/inner_layout_margin"
+                app2:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/inner_layout_margin"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/content_margin"
+                            android:text="Expenses Amount"
+                            android:textColor="@color/secondary"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/inner_layout_margin"
+                            android:background="#ff0000"
+                            android:gravity="start"
+                            android:padding="@dimen/content_margin"
+                            android:text="Expenses"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/secondaryLite" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/content_margin"
+                        android:paddingTop="@dimen/content_margin"
+                        android:text="Rs   500.00"
+                        android:textColor="@color/secondary"
+                        android:textSize="35sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/content_margin"
+                        android:paddingBottom="@dimen/content_margin"
+                        android:text="Total Expenses Amount"
+                        android:textColor="@color/secondary"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>

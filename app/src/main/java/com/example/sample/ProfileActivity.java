@@ -75,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
             } else
-                Toast.makeText(this,"Passwords are not equal",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Passwords are not equal", Toast.LENGTH_LONG).show();
         });
         update_user.setOnClickListener(n -> {
             JsonObject data = new JsonObject();
@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
             } else
-                Toast.makeText(this,"Username are not equal",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Username are not equal", Toast.LENGTH_LONG).show();
         });
 
     }

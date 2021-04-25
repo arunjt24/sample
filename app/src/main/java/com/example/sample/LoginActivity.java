@@ -43,9 +43,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public static void start(Context context) {
         Intent starter = new Intent(context, LoginActivity.class);
-        starter.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        starter.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(getPassword());
         login.setUserName(getName());
         login.setUserPassword(getPassword());
-
+        Preference.setBranchName(branchButton.getText().toString());
         HttpClient.login(login).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -164,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     if (user != null) {
                         if (user.getSuccess() == 1) {
-                            Preference.setUserLoggedIn(user.getEmployeeId(),user.getBranchId());
+                            Preference.setUserLoggedIn(user.getEmployeeId(), user.getBranchId());
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else {

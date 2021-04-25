@@ -42,19 +42,6 @@ public class CreateFragment extends Fragment {
 
         final MaterialButton create = root.findViewById(R.id.createBorrower);
 
-//        createViewModel.getBorrower().observe(getViewLifecycleOwner(), borrower -> {
-//            firstName.setText(borrower.getFirstName());
-//            fatherName.setText(borrower.getFatherName());
-//            eMail.setText(borrower.getEmail());
-//            mobileNumber.setText(borrower.getMobile());
-//            address.setText(borrower.getAddress());
-//            occupation.setText(borrower.getOccupation());
-//            monthlyIncome.setText(borrower.getMonthlyIncome());
-//            kycProof.setText(borrower.getProof());
-//            referenceName.setText(borrower.getReferenceName());
-//            referenceMobile.setText(borrower.getReferencMobile());
-//        });
-
         if (firstName.getText() != null &&
                 fatherName.getText() != null &&
                 eMail.getText() != null &&

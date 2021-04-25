@@ -19,11 +19,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.sample.client.HttpClient;
 import com.example.sample.model.BorrowerResponse;
-import com.example.sample.model.CollectionList;
-import com.example.sample.model.CollectionTypeResponse;
+import com.example.sample.model.CollectionsResponse;
 import com.example.sample.model.EmployeeResponse;
+import com.example.sample.model.LoanResponse;
+import com.example.sample.ui.collection.ListViewModel;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
     Listener listener;
     private AppBarConfiguration mAppBarConfiguration;
-    private BorrowerResponse.Borrower borrower;
-    private BorrowerResponse.Borrower collection;
     private NavController navController;
     private View fab;
     private ArrayList<BorrowerResponse.Borrower> borrowersList;
-    private ArrayList<CollectionTypeResponse.Type> collectionType;
+    private ArrayList<LoanResponse.Loan> loanList;
     private ArrayList<EmployeeResponse.Employee> employeeList;
-    private ArrayList<CollectionList.Collection> collectionLists;
+    private ArrayList<CollectionsResponse.Collection> collectionLists;
+    private ListViewModel collectionListModel;
+    private com.example.sample.ui.borrower.ListViewModel borrowerListModel;
 
     @Override
     public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
@@ -68,9 +68,10 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
         setContentView(R.layout.activity_main);
 
-        getBorrower();
+        getLoanList();
 
-        getCollection();
+        startActivityContents();
+
     }
 
     private void startActivityContents() {
@@ -101,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                 System.out.println("Responce :  " + response.code());
                 if (response.body() != null) {
                     setEmployeeList(response.body().getEmployeesList());
-                    getCollectionTypes();
                 } else {
                     getEmployees();
                 }
@@ -112,41 +112,39 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                 getEmployees();
             }
         });
-//        https://greatcoders.in/Financewebservices/employeelist.php
     }
 
-    private void getCollectionTypes() {
-        HttpClient.getCollectionTypes().enqueue(new Callback<CollectionTypeResponse>() {
+    private void getLoanList() {
+        HttpClient.getLoanList().enqueue(new Callback<LoanResponse>() {
             @Override
-            public void onResponse(Call<CollectionTypeResponse> call, Response<CollectionTypeResponse> response) {
+            public void onResponse(Call<LoanResponse> call, Response<LoanResponse> response) {
                 System.out.println("Responce :  " + response.code());
                 if (response.body() != null) {
-                    setCollectionTypes(response.body().getCollectionType());
-                    startActivityContents();
+                    setLoanList(response.body().getLoantlist());
                 } else {
-                    getCollectionTypes();
+                    getLoanList();
                 }
             }
 
             @Override
-            public void onFailure(Call<CollectionTypeResponse> call, Throwable t) {
-                getCollectionTypes();
+            public void onFailure(Call<LoanResponse> call, Throwable t) {
+                getLoanList();
             }
         });
     }
 
-    private void setCollectionTypes(ArrayList<CollectionTypeResponse.Type> collectionType) {
-        this.collectionType = collectionType;
+    private void setLoanList(ArrayList<LoanResponse.Loan> collectionType) {
+        this.loanList = collectionType;
     }
 
     private void setEmployeeList(ArrayList<EmployeeResponse.Employee> employeeList) {
         this.employeeList = employeeList;
     }
 
-    public String[] getCollectionType() {
+    public String[] getLoans() {
         ArrayList<String> types = new ArrayList<>();
-        for (CollectionTypeResponse.Type type: collectionType) {
-            types.add(type.getCollectionType());
+        for (LoanResponse.Loan type : loanList) {
+            types.add(type.getLoanid());
         }
 
         return types.toArray(new String[0]);
@@ -154,11 +152,15 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
     public String[] getEmployee() {
         ArrayList<String> employees = new ArrayList<>();
-        for (EmployeeResponse.Employee type: employeeList) {
+        for (EmployeeResponse.Employee type : employeeList) {
             employees.add(type.getUsername());
         }
 
         return employees.toArray(new String[0]);
+    }
+
+    public ArrayList<CollectionsResponse.Collection> getCollectionLists() {
+        return collectionLists;
     }
 
     @Override
@@ -181,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                 System.out.println("Responce :  " + response.code());
                 if (response.body() != null) {
                     setBorrowersList(response.body().getBorrowersList());
-                    getEmployees();
                 } else {
                     getBorrower();
                 }
@@ -196,43 +197,37 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         });
     }
 
-    public void getCollection(){
-        JsonObject list = new JsonObject();
-//        HttpClient.getcollectionlist(list).enqueue(new Callback<CollectionList>() {
-//            @Override
-//            public void onResponse(Call<CollectionList> call, Response<CollectionList> response) {
-//                System.out.println("Responce :  " + response.code());
-//                if (response.body() != null) {
-//                    setCollectionList(response.body().getCollectionList());
-//
-//                } else {
-//                    getCollection();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CollectionList> call, Throwable t) {
-//                getCollection();
-//            }
-//        });
-    }
+    public void getCollection() {
+        HttpClient.getCollectionList().enqueue(new Callback<CollectionsResponse>() {
+            @Override
+            public void onResponse(Call<CollectionsResponse> call, Response<CollectionsResponse> response) {
+                if (response.body() != null) {
+                    setCollectionList(response.body().getCollectionList());
+                } else {
+                    getCollection();
+                }
+            }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
+            @Override
+            public void onFailure(Call<CollectionsResponse> call, Throwable t) {
+                getCollection();
+            }
+        });
+    }
 
     public ArrayList<BorrowerResponse.Borrower> getBorrowersList() {
         return borrowersList;
     }
 
     private void setBorrowersList(ArrayList<BorrowerResponse.Borrower> borrowersList) {
+        if (borrowerListModel != null)
+            borrowerListModel.updateData(borrowersList);
         this.borrowersList = borrowersList;
     }
 
-    private void setCollectionList(ArrayList<CollectionList.Collection> collectionLists) {
+    private void setCollectionList(ArrayList<CollectionsResponse.Collection> collectionLists) {
+        if (collectionListModel != null)
+            collectionListModel.updateData(collectionLists);
         this.collectionLists = collectionLists;
     }
 
@@ -241,6 +236,14 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         if (listener != null && listener.onBackPressed())
             return;
         super.onBackPressed();
+    }
+
+    public void setCollectionModel(ListViewModel listViewModel) {
+        this.collectionListModel = listViewModel;
+    }
+
+    public void setBorrowerModel(com.example.sample.ui.borrower.ListViewModel listViewModel) {
+        this.borrowerListModel = listViewModel;
     }
 
     public interface Listener {

@@ -13,25 +13,25 @@
     <fragment
         android:id="@+id/nav_col_list"
         android:name="com.example.sample.ui.collection.ListFragment"
-        android:label="@string/menu_list"
+        android:label="@string/menu_collection"
         tools:layout="@layout/fragment_list_collections" />
 
     <fragment
         android:id="@+id/nav_col_create"
         android:name="com.example.sample.ui.collection.CreateFragment"
-        android:label="@string/menu_create"
+        android:label="Add Collection"
         tools:layout="@layout/fragment_new_collection" />
 
     <fragment
         android:id="@+id/nav_bor_create"
         android:name="com.example.sample.ui.borrower.CreateFragment"
-        android:label="@string/menu_create"
-        tools:layout="@layout/fragment_new_collection" />
+        android:label="Add Borrower"
+        tools:layout="@layout/fragment_new_borrowers" />
 
     <fragment
         android:id="@+id/nav_bor_list"
         android:name="com.example.sample.ui.borrower.ListFragment"
-        android:label="@string/menu_create"
-        tools:layout="@layout/fragment_new_collection" />
+        android:label="@string/menu_borrowers"
+        tools:layout="@layout/list_item_borrower" />
 
 </navigation>

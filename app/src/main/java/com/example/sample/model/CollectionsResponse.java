@@ -4,19 +4,27 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class CollectionList {
+public class CollectionsResponse {
 
     @SerializedName("success")
     private Integer success;
 
     @SerializedName("collectionlist")
-    private ArrayList<CollectionList.Collection> collectionlist;
+    private ArrayList<CollectionsResponse.Collection> collectionlist;
 
-    public ArrayList<CollectionList.Collection> getCollectionList() {
+    public ArrayList<CollectionsResponse.Collection> getCollectionList() {
         return collectionlist;
     }
 
-    public static class  Collection {
+    @Override
+    public String toString() {
+        return "CollectionsResponse{" +
+                "success=" + success +
+                ", collectionlist=" + collectionlist +
+                '}';
+    }
+
+    public static class Collection {
         @SerializedName("Collectiondate")
 
         private String collectiondate;
@@ -203,6 +211,29 @@ public class CollectionList {
 
         public void setCollection(String collection) {
             this.collection = collection;
+        }
+
+        @Override
+        public String toString() {
+            return "Collection{" +
+                    "collectiondate='" + collectiondate + '\'' +
+                    ", loancode='" + loancode + '\'' +
+                    ", principalamount='" + principalamount + '\'' +
+                    ", initiatedamount='" + initiatedamount + '\'' +
+                    ", intrest='" + intrest + '\'' +
+                    ", employeeid='" + employeeid + '\'' +
+                    ", employeecod=" + employeecod +
+                    ", employeename='" + employeename + '\'' +
+                    ", branchname='" + branchname + '\'' +
+                    ", borrowerscode='" + borrowerscode + '\'' +
+                    ", firstname='" + firstname + '\'' +
+                    ", collectiontyp='" + collectiontyp + '\'' +
+                    ", noofdays='" + noofdays + '\'' +
+                    ", pendinginstallments='" + pendinginstallments + '\'' +
+                    ", amount='" + amount + '\'' +
+                    ", balance='" + balance + '\'' +
+                    ", collection='" + collection + '\'' +
+                    '}';
         }
     }
 }

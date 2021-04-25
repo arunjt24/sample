@@ -15,10 +15,16 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.sample.MainActivity;
 import com.example.sample.R;
 import com.example.sample.client.HttpClient;
+import com.example.sample.util.Preference;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.JsonObject;
 
 import java.util.Calendar;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateFragment extends Fragment {
 
@@ -38,7 +44,7 @@ public class CreateFragment extends Fragment {
         employee.setOnClickListener(v -> {
             employee();
         });
-        status = root.findViewById(R.id.status);
+        status = root.findViewById(R.id.loan_id);
         status.setOnClickListener(v -> {
             status();
         });
@@ -75,14 +81,11 @@ public class CreateFragment extends Fragment {
     private void status() {
         AlertDialog.Builder statusAlert = new AlertDialog.Builder(activity);
         statusAlert.setCancelable(true);
-        String[] branchArray = activity.getCollectionType();
-        statusAlert.setSingleChoiceItems(branchArray, statusAlertCheckedItem, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                statusAlertCheckedItem = which;
-                status.setText(branchArray[which]);
-                dialog.cancel();
-            }
+        String[] branchArray = activity.getLoans();
+        statusAlert.setSingleChoiceItems(branchArray, statusAlertCheckedItem, (dialog, which) -> {
+            statusAlertCheckedItem = which;
+            status.setText(branchArray[which]);
+            dialog.cancel();
         });
         statusAlert.show();
     }
@@ -102,6 +105,27 @@ public class CreateFragment extends Fragment {
     }
 
     private void createCollection() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("Loanid", status.getText().toString());
+        jsonObject.addProperty("Branchid", Preference.getBranchID());
+        HttpClient.createCollectionList(jsonObject).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println("RESSSSSS " + response.body());
+                resetFields();
+            }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                resetFields();
+            }
+        });
+    }
+
+    private void resetFields() {
+        status.setText("Select Loan ID");
+        statusAlertCheckedItem = 0;
+        employee.setText("Select Employee");
+        employeeAlertCheckedItem = 0;
     }
 }

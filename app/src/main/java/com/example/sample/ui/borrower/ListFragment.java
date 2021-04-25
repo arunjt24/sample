@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.sample.MainActivity;
 import com.example.sample.R;
@@ -48,19 +49,21 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
     private ListViewModel listViewModel;
     private RecyclerListAdapter recyclerViewAdapter;
     private RecyclerView recyclerView;
+    private View borrowerCard;
+    private View updateButton;
+    private String borrowersId;
+    private MainActivity activity;
+    private SwipeRefreshLayout refresh;
     Observer<ArrayList<BorrowerResponse.Borrower>> userListUpdateObserver = new Observer<ArrayList<BorrowerResponse.Borrower>>() {
         @Override
         public void onChanged(ArrayList<BorrowerResponse.Borrower> userArrayList) {
             recyclerViewAdapter = new RecyclerListAdapter(getActivity(), userArrayList);
+            refresh.setRefreshing(false);
             LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(verticalLayoutManager);
             recyclerView.setAdapter(recyclerViewAdapter);
         }
     };
-    private View borrowerCard;
-    private View updateButton;
-    private String borrowersId;
-    private MainActivity activity;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
                 new ViewModelProvider(this).get(ListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_list_borrowers, container, false);
         activity = (MainActivity) getActivity();
+        activity.setBorrowerModel(listViewModel);
         activity.addListener(this);
         recyclerView = root.findViewById(R.id.recycler_view);
         borrowerCard = root.findViewById(R.id.borrowerCard);
@@ -113,9 +117,18 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
             });
         });
         listViewModel.getStringLiveData().observe(getViewLifecycleOwner(), userListUpdateObserver);
-        listViewModel.updateData(activity.getBorrowersList());
+//        listViewModel.updateData(activity.getBorrowersList());
+        activity.getBorrower();
+        refresh = root.findViewById(R.id.swipe_refresh);
+        refresh.setOnRefreshListener(() -> activity.getBorrower());
 
         return root;
+    }
+
+    @Override
+    public void onDetach() {
+        activity.setBorrowerModel(null);
+        super.onDetach();
     }
 
     public void refreshBorrowers() {

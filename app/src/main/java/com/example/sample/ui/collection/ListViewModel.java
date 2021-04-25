@@ -3,57 +3,26 @@ package com.example.sample.ui.collection;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.sample.model.CollectionsResponse;
+
 import java.util.ArrayList;
 
 public class ListViewModel extends ViewModel {
 
-    MutableLiveData<ArrayList<User>> stringLiveData;
-    ArrayList<User> stringArrayList;
+    MutableLiveData<ArrayList<CollectionsResponse.Collection>> stringLiveData;
+    ArrayList<CollectionsResponse.Collection> stringArrayList;
 
     public ListViewModel() {
         stringLiveData = new MutableLiveData<>();
-        initData();
-        stringLiveData.setValue(stringArrayList);
+        stringLiveData.setValue(new ArrayList<>());
     }
 
-    private void initData() {
-        int amount = 1500;
-        stringArrayList = new ArrayList<>();
-        amount = amount + 1;
-        stringArrayList.add(new User("A Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("B Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("C Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("D Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("E Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("F Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("G Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("H Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("I Arun", amount));
-        amount = amount + 1;
-        stringArrayList.add(new User("J Arun", amount));
+    public void updateData(ArrayList<CollectionsResponse.Collection> list) {
+        stringLiveData.postValue(list);
     }
 
-    public MutableLiveData<ArrayList<User>> getStringLiveData() {
+    public MutableLiveData<ArrayList<CollectionsResponse.Collection>> getStringLiveData() {
         return stringLiveData;
     }
 
-    public static class User {
-        String name;
-
-        Integer pendingAmount;
-
-        public User(String name, Integer pendingAmount) {
-            this.name = name;
-            this.pendingAmount = pendingAmount;
-        }
-
-    }
 }

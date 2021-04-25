@@ -2,12 +2,12 @@ package com.example.sample.client;
 
 import com.example.sample.model.BorrowerResponse;
 import com.example.sample.model.BranchResponse;
-import com.example.sample.model.CollectionTypeResponse;
+import com.example.sample.model.CollectionsResponse;
 import com.example.sample.model.EmployeeResponse;
+import com.example.sample.model.LoanResponse;
 import com.example.sample.model.Login;
 import com.example.sample.model.User;
 import com.example.sample.util.Config;
-import com.example.sample.util.Preference;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -64,12 +64,16 @@ public class HttpClient {
         return getServerApi().updatePassword(data);
     }
 
-    public static Call<String> createcollectionlist(JsonObject data) {
+    public static Call<String> createCollectionList(JsonObject data) {
         return getServerApi().addCollections(data);
     }
-    public static Call<String> getcollectionlist(JsonObject data) {
+
+    public static Call<CollectionsResponse> getCollectionList() {
+        JsonObject data = new JsonObject();
+        data.addProperty("Branchid", "4");
         return getServerApi().getCollections(data);
     }
+
     public static Call<String> updateUsername(JsonObject data) {
         return getServerApi().updateUsername(data);
     }
@@ -96,14 +100,14 @@ public class HttpClient {
 
     public static Call<EmployeeResponse> getEmployees() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("Branchid", Preference.getBranchID());
+        jsonObject.addProperty("Branchid", "4");
         return getServerApi().getEmployees(jsonObject);
     }
 
-    public static Call<CollectionTypeResponse> getCollectionTypes() {
+    public static Call<LoanResponse> getLoanList() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("Branchid", Preference.getBranchID());
-        return getServerApi().getCollectionTypes(jsonObject);
+        jsonObject.addProperty("Branchid", "4");
+        return getServerApi().getLoanList(jsonObject);
     }
 
     public static void createCollection() {
@@ -123,8 +127,8 @@ public class HttpClient {
         @POST("employeelist.php")
         Call<EmployeeResponse> getEmployees(@Body JsonObject jsonObject);
 
-        @POST("collectiontypelist.php")
-        Call<CollectionTypeResponse> getCollectionTypes(@Body JsonObject jsonObject);
+        @POST("loan.php")
+        Call<LoanResponse> getLoanList(@Body JsonObject jsonObject);
 
         @GET("allbranch.php")
         Call<BranchResponse> getBranches();
@@ -145,7 +149,7 @@ public class HttpClient {
         Call<String> updateUsername(@Body JsonObject body);
 
         @POST("collection.php")
-        Call<String> getCollections(@Body JsonObject body);
+        Call<CollectionsResponse> getCollections(@Body JsonObject body);
 
         @POST("addcollection.php")
         Call<String> addCollections(@Body JsonObject body);
