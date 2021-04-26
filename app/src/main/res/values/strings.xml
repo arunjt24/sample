@@ -1,16 +1,22 @@
 <resources>
-    <string name="app_name">Sample</string>
+    <string name="app_name">Anjaneya Associates</string>
     <string name="nav_header_title">Anjaneya Associates</string>
     <string name="nav_header_subtitle">Chennai</string>
     <string name="nav_header_desc">Navigation header</string>
 
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_collection">Collections</string>
+    <string name="menu_loan">Loan</string>
+    <string name="menu_expenses">Expenses</string>
+    <string name="menu_reports">Reports</string>
+
     <string name="menu_create">New</string>
     <string name="menu_list">List</string>
     <string name="welcome_message">Welcome to Anjaneya Associates</string>
     <string name="menu_borrowers">Borrowers</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_profile">Edit Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

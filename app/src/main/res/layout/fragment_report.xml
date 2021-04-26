@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.collection.CreateFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/outer_layout_margin"
+        app:cardCornerRadius="@dimen/form_element_radius"
+        app:contentPadding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/inner_layout_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/inner_layout_margin"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/inner_layout_margin"
+                        android:drawableStart="@drawable/ic_collections_24"
+                        android:gravity="center"
+                        android:padding="@dimen/content_margin"
+                        android:text="Get Reports"
+                        android:textColor="@color/primaryLite"
+                        android:textSize="25sp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/daily_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Daily Report"
+                        app:cornerRadius="@dimen/form_element_radius" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/weekly_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Weekly Report"
+                        app:cornerRadius="@dimen/form_element_radius" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/monthly_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Monthly Report"
+                        app:cornerRadius="@dimen/form_element_radius" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/expenses_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Expenses Report"
+                        app:cornerRadius="@dimen/form_element_radius" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/accounts_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Accounts Report"
+                        app:cornerRadius="@dimen/form_element_radius" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

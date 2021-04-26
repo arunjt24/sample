@@ -33,5 +33,32 @@
         android:name="com.example.sample.ui.borrower.ListFragment"
         android:label="@string/menu_borrowers"
         tools:layout="@layout/list_item_borrower" />
+    <fragment
+        android:id="@+id/nav_loan_create"
+        android:name="com.example.sample.ui.loan.LoanFragment"
+        android:label="Add Loan"
+        tools:layout="@layout/fragment_loan" />
+
+    <fragment
+        android:id="@+id/nav_loan_list"
+        android:name="com.example.sample.ui.loan.LoanFragment"
+        android:label="@string/menu_expenses"
+        tools:layout="@layout/list_item_borrower" />
+    <fragment
+        android:id="@+id/nav_expenses_create"
+        android:name="com.example.sample.ui.expenses.Expenses_Fragment"
+        android:label="Add Expenses"
+        tools:layout="@layout/fragment_expenses" />
+
+    <fragment
+        android:id="@+id/nav_expenses_list"
+        android:name="com.example.sample.ui.expenses.Expenses_Fragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/list_item_borrower" />
+    <fragment
+        android:id="@+id/nav_report_list"
+        android:name="com.example.sample.ui.reports.ReportFragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/fragment_report" />
 
 </navigation>

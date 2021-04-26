@@ -68,6 +68,10 @@ public class HttpClient {
         return getServerApi().addCollections(data);
     }
 
+    public static Call<String> createLoan(JsonObject data) {
+        return getServerApi().addLoan(data);
+    }
+
     public static Call<CollectionsResponse> getCollectionList() {
         JsonObject data = new JsonObject();
         data.addProperty("Branchid", "4");
@@ -153,6 +157,9 @@ public class HttpClient {
 
         @POST("addcollection.php")
         Call<String> addCollections(@Body JsonObject body);
+
+        @POST("addloan.php")
+        Call<String> addLoan(@Body JsonObject body);
 
     }
 

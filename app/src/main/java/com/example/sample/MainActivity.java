@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         navigationView.setItemIconTintList(null);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_dashboard, R.id.nav_bor_create, R.id.nav_bor_list, R.id.nav_col_create, R.id.nav_col_list)
+                R.id.nav_dashboard, R.id.nav_bor_create, R.id.nav_bor_list, R.id.nav_col_create, R.id.nav_col_list,R.id.nav_loan_create,R.id.nav_loan_list,R.id.nav_expenses_create,R.id.nav_expenses_list,R.id.nav_report_list)
                 .setDrawerLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
