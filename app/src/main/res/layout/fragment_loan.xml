@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/inner_layout_margin"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <ScrollView
@@ -29,9 +29,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_margin="@dimen/inner_layout_margin"
-                    android:gravity="center"
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView

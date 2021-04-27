@@ -64,6 +64,7 @@ public class CreateFragment extends Fragment {
                 borrower.setMonthlyIncome(monthlyIncome.getText().toString());
                 borrower.setProof(kycProof.getText().toString());
                 borrower.setReferenceName(referenceName.getText().toString());
+                borrower.setReferenceName(referenceName.getText().toString());
                 borrower.setReferencMobile(referenceMobile.getText().toString());
                 HttpClient.createBorrower(borrower).enqueue(new Callback<BorrowerResponse.Borrower>() {
                     @Override

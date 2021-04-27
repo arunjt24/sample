@@ -41,9 +41,9 @@
 
     <fragment
         android:id="@+id/nav_loan_list"
-        android:name="com.example.sample.ui.loan.LoanFragment"
-        android:label="@string/menu_expenses"
-        tools:layout="@layout/list_item_borrower" />
+        android:name="com.example.sample.ui.loan.LoanListFragment"
+        android:label="@string/menu_loan"
+        tools:layout="@layout/fragment_loan_list" />
     <fragment
         android:id="@+id/nav_expenses_create"
         android:name="com.example.sample.ui.expenses.Expenses_Fragment"

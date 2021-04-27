@@ -53,6 +53,14 @@
                         android:padding="@dimen/button_padding"
                         android:text="Select Employee"
                         app:cornerRadius="@dimen/form_element_radius" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/barrower_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Select Barrower"
+                        app:cornerRadius="@dimen/form_element_radius" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/loan_id"
@@ -70,7 +78,6 @@
                         android:layout_gravity="bottom"
                         android:padding="@dimen/button_padding"
                         android:text="Collection Date"
-                        android:visibility="gone"
                         app:cornerRadius="@dimen/form_element_radius" />
 
                     <com.google.android.material.button.MaterialButton
@@ -80,7 +87,6 @@
                         android:layout_gravity="bottom"
                         android:padding="@dimen/button_padding"
                         android:text="Paid Date"
-                        android:visibility="gone"
                         app:cornerRadius="@dimen/form_element_radius" />
 
                     <com.google.android.material.button.MaterialButton

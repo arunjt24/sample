@@ -31,9 +31,9 @@ import retrofit2.Response;
 public class LoanFragment extends Fragment {
 
 
-    private CreateViewModel createViewModel;
     private MainActivity activity;
-    private MaterialButton employee,loan_type,barrower_name,loan_status,createloan;
+    private CreateViewModel createViewModel;
+    private MaterialButton employee, loan_type, barrower_name, loan_status, createloan;
     private TextInputEditText principal_amount,service_charge,initiated_amount,interest,estimation_month;
     private int employeeAlertCheckedItem = 0;
 
@@ -43,6 +43,7 @@ public class LoanFragment extends Fragment {
         createViewModel = new ViewModelProvider(this).get(CreateViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_loan, container, false);
+        activity = (MainActivity) getActivity();
 
         employee = root.findViewById(R.id.employee);
         loan_type = root.findViewById(R.id.loan_type);
@@ -77,18 +78,18 @@ public class LoanFragment extends Fragment {
         ArrayList<String> loan_status = new ArrayList<>();
         loan_status.add("Open");
         loan_status.add("Closed");
-        AlertDialog.Builder employeeAlert = new AlertDialog.Builder(activity);
-        employeeAlert.setCancelable(true);
+        AlertDialog.Builder loanstatusAlert = new AlertDialog.Builder(activity);
+        loanstatusAlert.setCancelable(true);
         String[] branchArray = loan_status.toArray(new String[0]);
-        employeeAlert.setSingleChoiceItems(branchArray, employeeAlertCheckedItem, new DialogInterface.OnClickListener() {
+        loanstatusAlert.setSingleChoiceItems(branchArray, employeeAlertCheckedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 employeeAlertCheckedItem = which;
-                employee.setText(branchArray[which]);
+                loan_type.setText(branchArray[which]);
                 dialog.cancel();
             }
         });
-        employeeAlert.show();
+        loanstatusAlert.show();
     }
 
     private void loantype() {
@@ -103,7 +104,7 @@ public class LoanFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 employeeAlertCheckedItem = which;
-                employee.setText(branchArray[which]);
+                loan_status.setText(branchArray[which]);
                 dialog.cancel();
             }
         });

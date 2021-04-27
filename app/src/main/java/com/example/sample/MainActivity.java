@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
     private ArrayList<CollectionsResponse.Collection> collectionLists;
     private ListViewModel collectionListModel;
     private com.example.sample.ui.borrower.ListViewModel borrowerListModel;
+    private com.example.sample.ui.loan.ListViewModel loanListModel;
 
     @Override
     public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
         setContentView(R.layout.activity_main);
 
-        getLoanList();
+        getEmployees();
 
         startActivityContents();
 
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         });
     }
 
-    private void getLoanList() {
+    public void getLoanList() {
         HttpClient.getLoanList().enqueue(new Callback<LoanResponse>() {
             @Override
             public void onResponse(Call<LoanResponse> call, Response<LoanResponse> response) {
@@ -134,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
     }
 
     private void setLoanList(ArrayList<LoanResponse.Loan> collectionType) {
+        if (loanListModel != null)
+            loanListModel.updateData(collectionType);
         this.loanList = collectionType;
     }
 
@@ -155,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         for (EmployeeResponse.Employee type : employeeList) {
             employees.add(type.getUsername());
         }
-
+        System.out.println("employeeList"+employeeList);
         return employees.toArray(new String[0]);
     }
 
@@ -244,6 +247,10 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
     public void setBorrowerModel(com.example.sample.ui.borrower.ListViewModel listViewModel) {
         this.borrowerListModel = listViewModel;
+    }
+
+    public void setLoanModel(com.example.sample.ui.loan.ListViewModel listViewModel) {
+        this.loanListModel = listViewModel;
     }
 
     public interface Listener {
