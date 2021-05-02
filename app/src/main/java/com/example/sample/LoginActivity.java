@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private String[] branchArray = new String[]{};
     private TextView loginMessage;
     private List<BranchResponse.Branch> branchList = new ArrayList<>();
+    private ProgressBar loader;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, LoginActivity.class);
@@ -51,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loader = findViewById(R.id.progress);
 
         new Preference(this).init();
 
@@ -99,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<BranchResponse> call, Response<BranchResponse> response) {
                 if (response.code() == HTTP_OK) {
                     branchList = response.body().getBranchList();
+                    System.out.println("Branch Responce"+response.body().getBranchList());
                 } else {
                     getBranches();
                 }
@@ -156,12 +160,15 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(getPassword());
         login.setUserName(getName());
         login.setUserPassword(getPassword());
+        login.getBranchid();
+        loader.setVisibility(VISIBLE);
         Preference.setBranchName(branchButton.getText().toString());
         HttpClient.login(login).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 System.out.println("response.body() " + response.body());
                 if (response.code() == HTTP_OK) {
+                    loader.setVisibility(View.GONE);
                     User user = response.body();
                     if (user != null) {
                         if (user.getSuccess() == 1) {
@@ -177,6 +184,7 @@ public class LoginActivity extends AppCompatActivity {
                         loginFailed("Failed to login!");
                     }
                 } else {
+                    loader.setVisibility(View.GONE);
                     System.out.println("Failed to login! 2");
                     loginFailed("Failed to login!");
                 }
@@ -200,14 +208,16 @@ public class LoginActivity extends AppCompatActivity {
     public void showBranches(View view) {
         List<String> tempList = new ArrayList<>();
         for (BranchResponse.Branch branch : branchList) {
-            tempList.add(branch.getBranchName());
+            System.out.println("branch   "+branch.toString());
+            tempList.add(branch.getBranchName()+":"+branch.getBranchId());
         }
         branchArray = tempList.toArray(new String[0]);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setSingleChoiceItems(branchArray, checkedItem, (dialog, which) -> {
             checkedItem = which;
-            branchButton.setText(branchArray[which]);
+            String[] item = branchArray[which].split(":");
+            branchButton.setText(item[0]);
             dialog.cancel();
         });
         builder.show();

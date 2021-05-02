@@ -1,3 +1,4 @@
+
 package com.example.sample.client;
 
 import com.example.sample.model.BorrowerResponse;
@@ -8,6 +9,7 @@ import com.example.sample.model.LoanResponse;
 import com.example.sample.model.Login;
 import com.example.sample.model.User;
 import com.example.sample.util.Config;
+import com.example.sample.util.Preference;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -73,9 +75,9 @@ public class HttpClient {
     }
 
     public static Call<CollectionsResponse> getCollectionList() {
-        JsonObject data = new JsonObject();
-        data.addProperty("Branchid", "4");
-        return getServerApi().getCollections(data);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("Branchid", Preference.getBranchID());
+        return getServerApi().getCollections(jsonObject);
     }
 
     public static Call<String> updateUsername(JsonObject data) {
@@ -83,7 +85,9 @@ public class HttpClient {
     }
 
     public static Call<BorrowerResponse> getBorrowers() {
-        return getServerApi().getBorrowers();
+        JsonObject data = new JsonObject();
+        data.addProperty("Branchid", Preference.getBranchID());
+        return getServerApi().getBorrowers(data);
     }
 
     public static Call<BorrowerResponse.Borrower> createBorrower(BorrowerResponse.Borrower borrower) {
@@ -104,13 +108,13 @@ public class HttpClient {
 
     public static Call<EmployeeResponse> getEmployees() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("Branchid", "4");
+        jsonObject.addProperty("Branchid", Preference.getBranchID());
         return getServerApi().getEmployees(jsonObject);
     }
 
     public static Call<LoanResponse> getLoanList() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("Branchid", "4");
+        jsonObject.addProperty("Branchid",Preference.getBranchID());
         return getServerApi().getLoanList(jsonObject);
     }
 
@@ -125,8 +129,8 @@ public class HttpClient {
         @GET
         Call<ResponseBody> download(@Url String url);
 
-        @GET("borrowerslist.php")
-        Call<BorrowerResponse> getBorrowers();
+        @POST("borrowerslist.php")
+        Call<BorrowerResponse> getBorrowers(@Body JsonObject jsonObject);
 
         @POST("employeelist.php")
         Call<EmployeeResponse> getEmployees(@Body JsonObject jsonObject);

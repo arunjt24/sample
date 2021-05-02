@@ -58,5 +58,22 @@ public class EmployeeResponse {
             this.username = username;
         }
 
+        @Override
+        public String toString() {
+            return "Employee{" +
+                    "branchid='" + branchid + '\'' +
+                    ", employeecode='" + employeecode + '\'' +
+                    ", employeeid='" + employeeid + '\'' +
+                    ", username='" + username + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeResponse{" +
+                "success=" + success +
+                ", employeesList=" + employeesList +
+                '}';
     }
 }

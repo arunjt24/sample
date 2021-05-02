@@ -183,5 +183,33 @@ public class LoanResponse {
         public void setEndDate(String endDate) {
             this.endDate = endDate;
         }
+
+        @Override
+        public String toString() {
+            return "Loan{" +
+                    "loanid='" + loanid + '\'' +
+                    ", loancode='" + loancode + '\'' +
+                    ", principalamount='" + principalamount + '\'' +
+                    ", initiatedamount='" + initiatedamount + '\'' +
+                    ", loanstatus='" + loanstatus + '\'' +
+                    ", employeeid='" + employeeid + '\'' +
+                    ", employeecod='" + employeecod + '\'' +
+                    ", employeename='" + employeename + '\'' +
+                    ", branchname='" + branchname + '\'' +
+                    ", borrowerscode='" + borrowerscode + '\'' +
+                    ", firstname='" + firstname + '\'' +
+                    ", collectiontyp='" + collectiontyp + '\'' +
+                    ", startDate='" + startDate + '\'' +
+                    ", endDate='" + endDate + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "LoanResponse{" +
+                "success=" + success +
+                ", loantlist=" + loantlist +
+                '}';
     }
 }

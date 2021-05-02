@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -64,6 +66,7 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
             recyclerView.setAdapter(recyclerViewAdapter);
         }
     };
+    private ProgressBar loader;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -88,7 +91,10 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
         referenceMobile = root.findViewById(R.id.reference_mobile);
 
         updateButton = root.findViewById(R.id.updateBorrower);
+        loader = root.findViewById(R.id.progress);
         updateButton.setOnClickListener(v -> {
+            updateButton.setVisibility(View.GONE);
+            loader.setVisibility(View.VISIBLE);
             BorrowerResponse.Borrower editBorrower = new BorrowerResponse.Borrower();
             editBorrower.setFirstName(firstName.getText().toString());
             editBorrower.setFatherName(fatherName.getText().toString());
@@ -107,12 +113,19 @@ public class ListFragment extends Fragment implements LifecycleOwner, MainActivi
                 public void onResponse(Call<String> call, Response<String> response) {
                     System.out.println("response.body() " + response.code());
                     System.out.println("response.body() " + response.body().toString());
+                    Toast.makeText(getActivity(), "Collection Updated!",
+                            Toast.LENGTH_LONG).show();
                     borrowerCard.setVisibility(View.GONE);
+                    updateButton.setVisibility(View.VISIBLE);
+                    loader.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-
+                    updateButton.setVisibility(View.VISIBLE);
+                    loader.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "Promblem in Collection Update!",
+                            Toast.LENGTH_LONG).show();
                 }
             });
         });

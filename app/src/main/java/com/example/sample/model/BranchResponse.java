@@ -51,5 +51,12 @@ public class BranchResponse {
             this.branchName = branchName;
         }
 
+        @Override
+        public String toString() {
+            return "Branch{" +
+                    "branchId='" + branchId + '\'' +
+                    ", branchName='" + branchName + '\'' +
+                    '}';
+        }
     }
 }

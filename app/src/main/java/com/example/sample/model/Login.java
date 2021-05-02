@@ -7,6 +7,8 @@ public class Login {
     String userName;
     @SerializedName("Password")
     String userPassword;
+    @SerializedName("intBranchid")
+    String Branchid;
 
     public String getUserName() {
         return userName;
@@ -22,6 +24,14 @@ public class Login {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public void setBranchid(String branchid) {
+        this.Branchid = branchid;
+    }
+
+    public String getBranchid() {
+        return Branchid;
     }
 
     @Override

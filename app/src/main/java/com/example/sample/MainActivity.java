@@ -3,12 +3,14 @@ package com.example.sample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -31,19 +33,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements NavController.OnDestinationChangedListener {
+public class MainActivity extends AppCompatActivity implements NavController.OnDestinationChangedListener, NavigationView.OnNavigationItemSelectedListener {
 
     Listener listener;
     private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
     private View fab;
-    private ArrayList<BorrowerResponse.Borrower> borrowersList;
-    private ArrayList<LoanResponse.Loan> loanList;
-    private ArrayList<EmployeeResponse.Employee> employeeList;
-    private ArrayList<CollectionsResponse.Collection> collectionLists;
+    private ArrayList<BorrowerResponse.Borrower> borrowersList  = new ArrayList<>();
+    private ArrayList<LoanResponse.Loan> loanList  = new ArrayList<>();
+    private ArrayList<EmployeeResponse.Employee> employeeList  = new ArrayList<>();
+    private ArrayList<CollectionsResponse.Collection> collectionLists = new ArrayList<>();
     private ListViewModel collectionListModel;
     private com.example.sample.ui.borrower.ListViewModel borrowerListModel;
     private com.example.sample.ui.loan.ListViewModel loanListModel;
+    private NavigationView navigationView;
+    private SearchView searchview;
 
     @Override
     public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
@@ -71,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
         getEmployees();
 
+        getBorrower();
+
+        getLoanList();
+
         startActivityContents();
 
     }
@@ -83,8 +91,81 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
             startActivity(new Intent(this, ProfileActivity.class));
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        searchview = findViewById(R.id.search_view);
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                searchview.onActionViewCollapsed();
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
+
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (borrowerListModel != null) {
+                    if (newText.equals("")) {
+                        borrowerListModel.updateData(borrowersList);
+                        return false;
+                    }
+                    ArrayList<BorrowerResponse.Borrower> filteredList = new ArrayList<>();
+                    for (BorrowerResponse.Borrower borrower: borrowersList) {
+                        if (borrower.getFirstName().contains(newText)) {
+                            filteredList.add(borrower);
+                        }
+                    }
+                    borrowerListModel.updateData(filteredList);
+                }
+                if (collectionListModel != null) {
+                    if (newText.equals("")) {
+                        collectionListModel.updateData(collectionLists);
+                        return false;
+                    }
+                    ArrayList<CollectionsResponse.Collection> filteredList = new ArrayList<>();
+                    for (CollectionsResponse.Collection collection: collectionLists) {
+                        if (collection.getEmployeeid().contains(newText)) {
+                            filteredList.add(collection);
+                        }
+                    }
+                    collectionListModel.updateData(filteredList);
+                }
+                if (loanListModel != null){
+                    if (newText.equals("")) {
+                        loanListModel.updateData(loanList);
+                        return false;
+                    }
+                    ArrayList<LoanResponse.Loan> filteredList = new ArrayList<>();
+                    for (LoanResponse.Loan loan: loanList) {
+                        if (loan.getEmployeeid().contains(newText)) {
+                            filteredList.add(loan);
+                        }
+                    }
+                    loanListModel.updateData(filteredList);
+                }
+                return false;
+            }
+        });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_dashboard, R.id.nav_bor_create, R.id.nav_bor_list, R.id.nav_col_create, R.id.nav_col_list,R.id.nav_loan_create,R.id.nav_loan_list,R.id.nav_expenses_create,R.id.nav_expenses_list,R.id.nav_report_list)
@@ -92,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.addOnDestinationChangedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
@@ -100,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         HttpClient.getEmployees().enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
-                System.out.println("Responce :  " + response.code());
+                System.out.println("Responce :  " + response.body().toString());
                 if (response.body() != null) {
                     setEmployeeList(response.body().getEmployeesList());
                 } else {
@@ -119,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         HttpClient.getLoanList().enqueue(new Callback<LoanResponse>() {
             @Override
             public void onResponse(Call<LoanResponse> call, Response<LoanResponse> response) {
-                System.out.println("Responce :  " + response.code());
+                System.out.println("Responce loan:  " + response.body().toString());
                 if (response.body() != null) {
                     setLoanList(response.body().getLoantlist());
                 } else {
@@ -158,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         for (EmployeeResponse.Employee type : employeeList) {
             employees.add(type.getUsername());
         }
-        System.out.println("employeeList"+employeeList);
+        System.out.println("employeeList"+employeeList.toString());
         return employees.toArray(new String[0]);
     }
 
@@ -251,6 +333,44 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
     public void setLoanModel(com.example.sample.ui.loan.ListViewModel listViewModel) {
         this.loanListModel = listViewModel;
+    }
+
+    public String[] getBorrowers() {
+        ArrayList<String> types = new ArrayList<>();
+        for (BorrowerResponse.Borrower type : borrowersList) {
+            types.add(type.getFirstName());
+        }
+
+        return types.toArray(new String[0]);
+    }
+
+    public String[] getLoanBorrowers() {
+        ArrayList<String> types = new ArrayList<>();
+        for (BorrowerResponse.Borrower type : borrowersList) {
+            //types.add(type.getFirstName());
+            types.add(type.getFirstName()+":"+type.getBorrowersId());
+        }
+
+        return types.toArray(new String[0]);
+    }
+
+    public void showLoanList() {
+        System.out.println("navigationView.getMenu() " + navigationView.getMenu().size());
+        navController.navigate(R.id.nav_loan_list);
+//        navigationView.getMenu().findItem(R.id.nav_loan_list).setChecked(true);
+    }
+    public void showCollectionList() {
+        System.out.println("navigationView.getMenu() 1 " + navigationView.getMenu().size());
+        navController.navigate(R.id.nav_col_list);
+//        navigationView.getMenu().findItem(R.id.nav_loan_list).setChecked(true);
+    }
+    public void showBarrowerList() {
+        navController.navigate(R.id.nav_bor_list);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 
     public interface Listener {

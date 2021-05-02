@@ -157,6 +157,12 @@
                         app:cornerRadius="@dimen/form_element_radius" />
                 </LinearLayout>
             </ScrollView>
+            <ProgressBar
+                android:id="@+id/progress"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

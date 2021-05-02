@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -33,6 +35,9 @@ public class CreateFragment extends Fragment {
     private MaterialButton employee, status, collectionDate, paidDate, createCollection;
     private MainActivity activity;
     private int employeeAlertCheckedItem = 0, statusAlertCheckedItem = 0;
+    private MaterialButton borrower;
+    private int borrowerAlertCheckedItem = 0;
+    private ProgressBar loader;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +46,13 @@ public class CreateFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_new_collection, container, false);
         activity = (MainActivity) getActivity();
         employee = root.findViewById(R.id.employee);
+        loader = root.findViewById(R.id.progress);
         employee.setOnClickListener(v -> {
             employee();
+        });
+        borrower = root.findViewById(R.id.barrower_name);
+        borrower.setOnClickListener(v -> {
+            borrower();
         });
         status = root.findViewById(R.id.loan_id);
         status.setOnClickListener(v -> {
@@ -61,6 +71,21 @@ public class CreateFragment extends Fragment {
             createCollection();
         });
         return root;
+    }
+
+    private void borrower() {
+        AlertDialog.Builder employeeAlert = new AlertDialog.Builder(activity);
+        employeeAlert.setCancelable(true);
+        String[] branchArray = activity.getBorrowers();
+        employeeAlert.setSingleChoiceItems(branchArray, borrowerAlertCheckedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                borrowerAlertCheckedItem = which;
+                borrower.setText(branchArray[which]);
+                dialog.cancel();
+            }
+        });
+        employeeAlert.show();
     }
 
     private void employee() {
@@ -105,21 +130,39 @@ public class CreateFragment extends Fragment {
     }
 
     private void createCollection() {
+        loader.setVisibility(View.VISIBLE);
+        createCollection.setVisibility(View.GONE);
         JsonObject jsonObject = new JsonObject();
+        System.out.println("status.getText().toString() "+status.getText().toString());
         jsonObject.addProperty("Loanid", status.getText().toString());
         jsonObject.addProperty("Branchid", Preference.getBranchID());
+        System.out.println("RESSSSSSL " + status.getText().toString() + Preference.getBranchID());
         HttpClient.createCollectionList(jsonObject).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                System.out.println("RESSSSSS " + response.body());
+                System.out.println("RESSSSSSL " + response.body());
+                System.out.println("RESSSSSSL 1" + response.code());
+                loader.setVisibility(View.GONE);
+                createCollection.setVisibility(View.VISIBLE);
+                redirect();
+                Toast.makeText(getActivity(), "Collection Created!",
+                        Toast.LENGTH_LONG).show();
                 resetFields();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                loader.setVisibility(View.GONE);
+                createCollection.setVisibility(View.VISIBLE);
+                Toast.makeText(getActivity(), "Problem in Creating Collection!",
+                        Toast.LENGTH_LONG).show();
                 resetFields();
             }
         });
+    }
+
+    private void redirect() {
+        activity.showCollectionList();
     }
 
     private void resetFields() {

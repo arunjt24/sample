@@ -183,17 +183,36 @@
                             android:importantForAutofill="no"
                             android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/employee_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:padding="@dimen/button_padding"
+                        android:text="Select Status"
+                        app:cornerRadius="@dimen/form_element_radius" />
+
                 </LinearLayout>
             </ScrollView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/createBorrower"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="@dimen/button_padding"
-                android:text="Create"
-                app:cornerRadius="@dimen/form_element_radius" />
+                android:layout_height="wrap_content">
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/createBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:padding="@dimen/button_padding"
+                    android:text="Create"
+                    app:cornerRadius="@dimen/form_element_radius" />
+            </RelativeLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

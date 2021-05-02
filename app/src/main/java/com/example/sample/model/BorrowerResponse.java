@@ -178,4 +178,12 @@ public class BorrowerResponse {
                     '}';
         }
     }
+
+    @Override
+    public String toString() {
+        return "BorrowerResponse{" +
+                "success=" + success +
+                ", borrowersList=" + borrowersList +
+                '}';
+    }
 }
