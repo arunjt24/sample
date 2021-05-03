@@ -16,6 +16,10 @@ public class CollectionsResponse {
         return collectionlist;
     }
 
+    public boolean getSuccess() {
+        return success == 1;
+    }
+
     @Override
     public String toString() {
         return "CollectionsResponse{" +

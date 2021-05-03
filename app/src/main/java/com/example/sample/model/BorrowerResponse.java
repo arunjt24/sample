@@ -11,6 +11,10 @@ public class BorrowerResponse {
     @SerializedName("borrowerslist")
     private ArrayList<Borrower> borrowersList;
 
+    public boolean getSuccess() {
+        return success == 1;
+    }
+
     public ArrayList<Borrower> getBorrowersList() {
         return borrowersList;
     }

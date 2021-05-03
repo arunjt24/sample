@@ -25,6 +25,7 @@ import com.example.sample.model.CollectionsResponse;
 import com.example.sample.model.EmployeeResponse;
 import com.example.sample.model.LoanResponse;
 import com.example.sample.ui.collection.ListViewModel;
+import com.example.sample.ui.dashboard.DashboardViewModel;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -43,9 +44,11 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
     private ArrayList<LoanResponse.Loan> loanList  = new ArrayList<>();
     private ArrayList<EmployeeResponse.Employee> employeeList  = new ArrayList<>();
     private ArrayList<CollectionsResponse.Collection> collectionLists = new ArrayList<>();
+    private ArrayList<CollectionsResponse.Collection> todayCollectionLists = new ArrayList<>();
     private ListViewModel collectionListModel;
     private com.example.sample.ui.borrower.ListViewModel borrowerListModel;
     private com.example.sample.ui.loan.ListViewModel loanListModel;
+    private DashboardViewModel dashboardViewModel;
     private NavigationView navigationView;
     private SearchView searchview;
 
@@ -78,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         getBorrower();
 
         getLoanList();
+
+        getTodayCollection();
 
         startActivityContents();
 
@@ -124,7 +129,19 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (borrowerListModel != null) {
+                if (dashboardViewModel != null) {
+                    if (newText.equals("")) {
+                        dashboardViewModel.updateData(todayCollectionLists);
+                        return false;
+                    }
+                    ArrayList<CollectionsResponse.Collection> filteredList = new ArrayList<>();
+                    for (CollectionsResponse.Collection collection: todayCollectionLists) {
+                        if (collection.getEmployeeid().contains(newText)) {
+                            filteredList.add(collection);
+                        }
+                    }
+                    dashboardViewModel.updateData(filteredList);
+                } else if (borrowerListModel != null) {
                     if (newText.equals("")) {
                         borrowerListModel.updateData(borrowersList);
                         return false;
@@ -136,8 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                         }
                     }
                     borrowerListModel.updateData(filteredList);
-                }
-                if (collectionListModel != null) {
+                } else if (collectionListModel != null) {
                     if (newText.equals("")) {
                         collectionListModel.updateData(collectionLists);
                         return false;
@@ -149,8 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
                         }
                     }
                     collectionListModel.updateData(filteredList);
-                }
-                if (loanListModel != null){
+                } else if (loanListModel != null) {
                     if (newText.equals("")) {
                         loanListModel.updateData(loanList);
                         return false;
@@ -183,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
                 System.out.println("Responce :  " + response.body().toString());
-                if (response.body() != null) {
+                if (response.isSuccessful() && response.body() != null && response.body().getSuccess() ) {
                     setEmployeeList(response.body().getEmployeesList());
                 } else {
                     getEmployees();
@@ -202,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
             @Override
             public void onResponse(Call<LoanResponse> call, Response<LoanResponse> response) {
                 System.out.println("Responce loan:  " + response.body().toString());
-                if (response.body() != null) {
+                if (response.isSuccessful() && response.body() != null && response.body().getSuccess() ) {
                     setLoanList(response.body().getLoantlist());
                 } else {
                     getLoanList();
@@ -266,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
             @Override
             public void onResponse(Call<BorrowerResponse> call, Response<BorrowerResponse> response) {
                 System.out.println("Responce :  " + response.code());
-                if (response.body() != null) {
+                if (response.isSuccessful() && response.body() != null && response.body().getSuccess() ) {
                     setBorrowersList(response.body().getBorrowersList());
                 } else {
                     getBorrower();
@@ -286,10 +301,28 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         HttpClient.getCollectionList().enqueue(new Callback<CollectionsResponse>() {
             @Override
             public void onResponse(Call<CollectionsResponse> call, Response<CollectionsResponse> response) {
-                if (response.body() != null) {
+                if (response.isSuccessful() && response.body() != null && response.body().getSuccess() ) {
                     setCollectionList(response.body().getCollectionList());
                 } else {
                     getCollection();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CollectionsResponse> call, Throwable t) {
+                getCollection();
+            }
+        });
+    }
+
+    public void getTodayCollection() {
+        HttpClient.getTodayCollectionList().enqueue(new Callback<CollectionsResponse>() {
+            @Override
+            public void onResponse(Call<CollectionsResponse> call, Response<CollectionsResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getSuccess() ) {
+                    setTodayCollectionList(response.body().getCollectionList());
+                } else {
+                    getTodayCollection();
                 }
             }
 
@@ -308,6 +341,12 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
         if (borrowerListModel != null)
             borrowerListModel.updateData(borrowersList);
         this.borrowersList = borrowersList;
+    }
+
+    private void setTodayCollectionList(ArrayList<CollectionsResponse.Collection> collectionLists) {
+        if (dashboardViewModel != null)
+            dashboardViewModel.updateData(collectionLists);
+        this.todayCollectionLists = collectionLists;
     }
 
     private void setCollectionList(ArrayList<CollectionsResponse.Collection> collectionLists) {
@@ -333,6 +372,10 @@ public class MainActivity extends AppCompatActivity implements NavController.OnD
 
     public void setLoanModel(com.example.sample.ui.loan.ListViewModel listViewModel) {
         this.loanListModel = listViewModel;
+    }
+
+    public void setDashboardModel(DashboardViewModel dashboardViewModel) {
+        this.dashboardViewModel = dashboardViewModel;
     }
 
     public String[] getBorrowers() {

@@ -11,6 +11,10 @@ public class EmployeeResponse {
     @SerializedName("branchlist")
     private ArrayList<Employee> employeesList;
 
+    public boolean getSuccess() {
+        return success == 1;
+    }
+
     public ArrayList<Employee> getEmployeesList() {
         return employeesList;
     }

@@ -12,8 +12,8 @@ public class LoanResponse {
     @SerializedName("loantlist")
     private ArrayList<Loan> loantlist = null;
 
-    public Integer getSuccess() {
-        return success;
+    public boolean getSuccess() {
+        return success == 1;
     }
 
     public void setSuccess(Integer success) {

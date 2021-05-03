@@ -4,19 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.sample.model.CollectionsResponse;
+
+import java.util.ArrayList;
+
 public class DashboardViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    MutableLiveData<ArrayList<CollectionsResponse.Collection>> stringLiveData;
+    ArrayList<CollectionsResponse.Collection> stringArrayList;
 
     public DashboardViewModel() {
-        mText = new MutableLiveData<>();
+        stringLiveData = new MutableLiveData<>();
+        stringLiveData.setValue(new ArrayList<>());
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void updateData(ArrayList<CollectionsResponse.Collection> list) {
+        stringLiveData.postValue(list);
     }
 
-    public void setWelcomeMessage(String welcome) {
-        mText.postValue(welcome);
+    public MutableLiveData<ArrayList<CollectionsResponse.Collection>> getStringLiveData() {
+        return stringLiveData;
     }
 }

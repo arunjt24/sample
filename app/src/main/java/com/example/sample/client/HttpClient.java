@@ -80,6 +80,12 @@ public class HttpClient {
         return getServerApi().getCollections(jsonObject);
     }
 
+    public static Call<CollectionsResponse> getTodayCollectionList() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("Branchid", Preference.getBranchID());
+        return getServerApi().getTodayCollections(jsonObject);
+    }
+
     public static Call<String> updateUsername(JsonObject data) {
         return getServerApi().updateUsername(data);
     }
@@ -158,6 +164,9 @@ public class HttpClient {
 
         @POST("collection.php")
         Call<CollectionsResponse> getCollections(@Body JsonObject body);
+
+        @POST("todaycollection.php")
+        Call<CollectionsResponse> getTodayCollections(@Body JsonObject body);
 
         @POST("addcollection.php")
         Call<String> addCollections(@Body JsonObject body);
